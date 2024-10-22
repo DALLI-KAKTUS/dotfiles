@@ -21,8 +21,12 @@
 
   # flatpak
    services.flatpak.enable = true;
-   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
-   xdg.portal.enable = true;
+   xdg.portal= {
+   enable = true;
+   gtkUsePortal = true;
+   extraPortals = [ pkgs.xdg-desktop-portal-gtk  pkgs.xdg-desktop-portal-hyprland];
+   };
+   
 
   # Home manager
    home-manager = {

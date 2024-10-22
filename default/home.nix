@@ -92,7 +92,6 @@ in {
     #hyprland ui utils
     kdePackages.qt6ct
     hyprpaper
-    xdg-desktop-portal-hyprland
     dunst
     hyprshot
     bun
