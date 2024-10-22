@@ -118,11 +118,11 @@ in {
     vhdl-ls
     svls
   ];
-  # home.file.".thunderbird" = {
-  # source = ../dotfiles/thunderbird;
-  # target = ".thunderbird";
-  # recursive = true;
-  # };
+  home.file.".thunderbird" = {
+  source = ../dotfiles/thunderbird;
+  target = ".thunderbird";
+  recursive = true;
+  };
 
   # HYPRLAND CONFIG
     wayland.windowManager.hyprland = {
