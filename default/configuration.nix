@@ -1,152 +1,166 @@
-# your system. Help is available in the configuration.nix(5) man page, on
-# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
-{ config, lib, pkgs, inputs, ... }:
-
-{ 
-  services.xserver.enable = true;
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}: {
+  services.xserver.enable = true; # X sunucusunu etkinleştir
   services.xserver.displayManager.gdm = {
-    enable=true;
-    wayland=true;
+    enable = true; # GDM (GNOME Display Manager) etkinleştir
+    wayland = true; # Wayland kullan
   };
-  imports =
-    [ # Include the results of the hardware scan.
-      inputs.home-manager.nixosModules.default
-    ];
-    # make zsh default shell for all users
-   users.defaultUserShell = pkgs.zsh;
-   programs.zsh.enable=true;
-  # Unfree Packages
-   nixpkgs.config.allowUnfree = true;
+  services.xserver.desktopManager.xfce.enable = true; # XFCE masaüstü ortamını etkinleştir
+  services.xserver.displayManager.startx.enable = true; # startx'i etkinleştir
+  services.xserver.autorun = true; # Otomatik başlatmayı etkinleştir
+  programs.hyprland.enable = true; #hyprlandi etkinleştir
+  imports = [
+    # Donanım taramasının sonuçlarını dahil et.
+    inputs.home-manager.nixosModules.default
+  ];
+  
+  # zsh'yi tüm kullanıcılar için varsayılan kabuk yap
+  users.defaultUserShell = pkgs.zsh;
+  programs.zsh.enable = true; # Zsh'yi etkinleştir
 
-  # flatpak
-   services.flatpak.enable = true;
-   xdg.portal= {
-   enable = true;
-   gtkUsePortal = true;
-   extraPortals = [ pkgs.xdg-desktop-portal-gtk  pkgs.xdg-desktop-portal-hyprland];
-   };
-   
+  # Unfree Paketler
+  nixpkgs.config.allowUnfree = true; # Unfree paketlere izin ver
 
-  # Home manager
-   home-manager = {
-       useGlobalPkgs = true;
-       useUserPackages = true;
-      # also pass inputs to home-manager modules
-      extraSpecialArgs = {inherit inputs;};
-      users = {
-        "Kaktus" = import ./home.nix;
-      };
-   };
-  # windows aplications
-   hardware.spacenavd.enable=true;
-  # devenv
-   nix.extraOptions = ''
-    trusted-users = root Kaktus
-   '';
-  # Hyprland
-  programs.hyprland.enable = true;
-
-# Define a user account. Don't forget to set a password with ‘passwd’.
-   users.users.Kaktus= {
-     isNormalUser = true;
-     extraGroups = [ "wheel" "netdev" ]; # Enable ‘sudo’ for the user.
-     packages = with pkgs; [
-       # cold start
-       firefox
-           ];
-   };
-  # Font Configuration
-  fonts = {
-    enableDefaultPackages = true;
-    fontconfig = {
-      enable = true;
-      defaultFonts = {
-        serif = [  "VictorMono Nerd Font" ];
-        sansSerif = [ "VictorMono Nerd Font" ];
-        monospace = [ "VictorMono Nerd Font" ];
-      };
+  # Flatpak
+  services.flatpak.enable = true; # Flatpak'ı etkinleştir
+  xdg.portal = {
+    enable = true; # XDG portalını etkinleştir
+    extraPortals = [pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-wlr]; # Ek portal tanımları
   };
+
+  # Home Manager
+  home-manager = {
+    useGlobalPkgs = true; # Global paketleri kullan
+    useUserPackages = true; # Kullanıcı paketlerini kullan
+    # Ayrıca home-manager modüllerine girişleri ilet
+    extraSpecialArgs = { inherit inputs; };
+    users = {
+      "Kaktus" = import ./home.nix; # "Kaktus" kullanıcısının ayarlarını dahil et
+    };
+  };
+
+  # Windows uygulamaları
+  hardware.spacenavd.enable = true; # Spacenav desteğini etkinleştir
+
+  # Geliştirme ortamı
+  nix.extraOptions = ''
+    trusted-users = root Kaktus # Güvenilir kullanıcılar
+  '';
+  # Steam
+  programs.java.enable = true; # Java'yı etkinleştir
+  programs.steam.enable = true; # Steam'i etkinleştir
+
+  # Kullanıcı hesabı tanımlama. Şifreyi 'passwd' ile ayarlamayı unutmayın.
+  users.users.Kaktus = {
+    isNormalUser = true; # Normal kullanıcı olarak tanımla
+    extraGroups = ["wheel" "netdev" "networkmanager"]; # Kullanıcıya 'sudo' erişimi sağla
     packages = with pkgs; [
-      (nerdfonts.override { fonts = [ "VictorMono" ]; })
+      firefox # Firefox tarayıcısını ekle
     ];
   };
-  environment.sessionVariables = {
-    # If your cursor becomes invisible
-    WLR_NO_HARDWARE_CURSORS = "1";
-    # Hint electron apps to use wayland
-    NIXOS_OZONE_WL = "1";
-  };
-  # Virtualbox
-   virtualisation.vmware.guest.enable = true;
-   virtualisation.vmware.host.enable = true;
-   users.extraGroups.vboxusers.members = [ "Kaktus" ];
-   virtualisation.virtualbox.host.enable = true;
-   #virtualisation.virtualbox.host.enableExtensionPack = true;
 
-  # docker podman
-  virtualisation.containers.enable = true;
+  # Font Konfigürasyonu
+  fonts = {
+    enableDefaultPackages = true; # Varsayılan font paketlerini etkinleştir
+    fontconfig = {
+      enable = true; # Font yapılandırmasını etkinleştir
+      defaultFonts = {
+        serif = ["VictorMono Nerd Font"]; # Serif font
+        sansSerif = ["VictorMono Nerd Font"]; # Sans serif font
+        monospace = ["VictorMono Nerd Font"]; # Monospace font
+      };
+    };
+    packages = with pkgs; [
+      (nerdfonts.override { fonts = ["VictorMono"]; }) # Nerd fontları
+    ];
+  };
+
+  environment.sessionVariables = {
+    # İmlecin görünmez hale gelmesi durumunda
+    WLR_NO_HARDWARE_CURSORS = "1"; # Donanım imlecini devre dışı bırak
+    # Electron uygulamalarının Wayland kullanmasını sağla
+    NIXOS_OZONE_WL = "1"; # Wayland için Ozone desteği
+  };
+
+  # Virtualbox
+  virtualisation.vmware.guest.enable = true; # VMware misafir desteğini etkinleştir
+  virtualisation.vmware.host.enable = true; # VMware ana bilgisayar desteğini etkinleştir
+  users.extraGroups.vboxusers.members = ["Kaktus"]; # Kaktus kullanıcısını vboxusers grubuna ekle
+  virtualisation.virtualbox.host.enable = true; # VirtualBox ana bilgisayar desteğini etkinleştir
+  # virtualisation.virtualbox.host.enableExtensionPack = true; # Genişletme paketini etkinleştirmek için
+
+  # Docker Podman
+  virtualisation.containers.enable = true; # Konteynerleri etkinleştir
+  hardware.nvidia-container-toolkit.enable = true; # NVIDIA konteyner aracı desteğini etkinleştir
   virtualisation = {
     podman = {
-      enable = true;
-      # Create a `docker` alias for podman, to use it as a drop-in replacement
-      dockerCompat = true;
-      # Required for containers under podman-compose to be able to talk to each other.
+      enable = true; # Podman'ı etkinleştir
+      # Podman'ı, Docker ile birlikte kullanılacak şekilde yapılandır
+      dockerCompat = true; 
+      # Podman-compose ile oluşturulan konteynerlerin birbiriyle iletişim kurabilmesi için gerekli
       defaultNetwork.settings.dns_enabled = true;
     };
   };
+
   # $ nix search wget
-   environment.systemPackages = with pkgs; [
-     neovim 
-     kate # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-     # cold start
-     wget
-     zsh
-     neofetch
-     btop
-     git
-     tree
-     home-manager
-     lf
-     fd
-     # sound pkgs
-     alsa-utils
-     alsa-tools
-     pulseaudio-ctl
-     pavucontrol
-     #bluetooth
-     bluetuith
-     bluez-tools
-     #sistem araçları
-     intel-gpu-tools
-     gparted
-     gptfdisk
-     htop
-     ncdu
-     smartmontools
-     nixos-firewall-tool
-     zram-generator
-     docker
-     baobab
-     wirelesstools
-     brightnessctl
-     networkmanagerapplet
-     lshw
-     xorg.xeyes
-     lm_sensors
-     unzip
-     gcc_multi
-     pciutils
-     lm_sensors
-     spacenavd
-     libimobiledevice
-     ifuse
-     dive 
-     podman-tui 
-     podman-compose
-     tldr
-     ];
-  system.stateVersion = "24.05"; # Did you read the comment?
+  environment.systemPackages = with pkgs; [
+    neovim # Neovim metin editörü
+    kate # Yapılandırma.nix dosyasını düzenlemek için bir editör ekle
+    # Soğuk başlatma için
+    wget # Wget aracı
+    zsh # Zsh kabuğu
+    neofetch # Sistem bilgilerini görüntülemek için
+    btop # Sistem kaynaklarını görüntülemek için
+    git # Git sürüm kontrol aracı
+    tree # Ağaç yapısını görüntülemek için
+    home-manager # Home Manager
+    lf # Listeler için bir dosya yöneticisi
+    fd # Hızlı dosya bulucu
+    # Ses paketleri
+    alsa-utils # ALSA araçları
+    alsa-tools # ALSA araçları
+    pulseaudio-ctl # PulseAudio kontrol aracı
+    pavucontrol # PulseAudio ses kontrolü
+    # Bluetooth
+    bluetuith # Bluetooth yönetimi için
+    bluez-tools # BlueZ araçları
+    # Sistem araçları
+    intel-gpu-tools # Intel GPU araçları
+    gparted # Disk bölümlerini yönetmek için
+    gptfdisk # GPT disk bölümleri için
+    htop # Etkileşimli sistem izleyici
+    ncdu # Disk kullanım analizi
+    smartmontools # SMART disk durumu araçları
+    nixos-firewall-tool # NixOS güvenlik duvarı aracı
+    zram-generator # ZRAM oluşturucu
+    baobab # Disk kullanımını görselleştirmek için
+    wirelesstools # Kablosuz araçlar
+    brightnessctl # Ekran parlaklığını kontrol etmek için
+    networkmanagerapplet # Ağ yöneticisi simgesi
+    lshw # Donanım bilgilerini görüntülemek için
+    xorg.xhost # X sunucusu kontrol aracı
+    xorg.xeyes # X göz simülatörü
+    lm_sensors # Donanım sensörleri
+    unzip # ZIP dosyalarını çıkarmak için
+    gcc_multi # Çoklu GCC desteği
+    pciutils # PCI cihaz bilgileri
+    lm_sensors # Donanım sensörleri (tekrar eklenmiş, gereksiz olabilir)
+    spacenavd # Spacenav desteği
+    libimobiledevice # iOS cihazlarıyla etkileşim için
+    ifuse # iOS dosya sistemi bağlama aracı
+    dive # Docker görüntülerini analiz etmek için
+    podman-tui # Podman için metin tabanlı kullanıcı arayüzü
+    podman-compose # Podman için bileşen oluşturucu
+    tldr # Kısa komut açıklamaları
+    steam-run # Steam oyunlarını başlatmak için
+    glxinfo # GLX bilgi aracı
+    openssl # ssl sertifika aracı
+  ];
 
+  system.stateVersion = "24.05"; # Yorum: Bu yapılandırma, NixOS 24.05 sürümüne uygun
 }
-

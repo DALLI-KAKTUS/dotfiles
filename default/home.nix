@@ -3,29 +3,21 @@
   pkgs,
   inputs,
   ...
-}: 
-let
+}: let
   config_files = ../dotfiles;
-  toConfigFile = file: (toString config_files + ("/" + file));
+  toConfigFile = file: (toString config_files + ("/" + file)); # config dosyalarının konumlarını kolayca oluştur
 in {
-  imports = [ inputs.ags.homeManagerModules.default ];
   home.username = "Kaktus";
   home.homeDirectory = "/home/Kaktus";
   home.stateVersion = "24.05"; # Please read the comment before changing.
   # Bash
   programs.bash.enable = true;
-  # Zeoxide
-  programs.zoxide = {
-  enable = true;
-  enableZshIntegration = true;
-  options = [
-  "--cmd cd"
-  ];
-  };
+
   home.packages = with pkgs; [
     sl
     hello
     # Dev Tools
+    qgroundcontrol
     arduino-ide
     arduino
     gradle
@@ -37,7 +29,9 @@ in {
     nodejs_22
     devenv
     gnome.gnome-maps
-    # bat
+    nvidia-podman
+    distrobox
+    p7zip
     # Multimedya
     blender
     #davinci-resolve
@@ -53,7 +47,6 @@ in {
     # Oyun ve Eğlence
     lutris
     spotify
-    steam
     obs-studio
     wireplumber
     pipewire
@@ -106,10 +99,15 @@ in {
     swappy
     supergfxctl
     #fusion 360
+    darling
+    darling-dmg
     bottles
-    wine64
+    wineWowPackages.full
     winetricks
     vulkan-tools
+    # akademik
+    mendeley
+
     # Language Servers
     ed
     nil
@@ -117,67 +115,79 @@ in {
     vhdl-ls
     svls
   ];
+  # Thunderbird Config
   home.file.".thunderbird" = {
-  source = ../dotfiles/thunderbird;
-  target = ".thunderbird";
-  recursive = true;
+    source = ../dotfiles/thunderbird;
+    target = ".thunderbird";
+    recursive = true;
   };
-
   # HYPRLAND CONFIG
-    wayland.windowManager.hyprland = {
-      enable = true;
-      xwayland.enable = true;
-      extraConfig = ''
-        ${builtins.readFile (toConfigFile "hypr/hyprland.conf")}
-      '';
-      plugins = with pkgs.hyprlandPlugins; [
-        # hyprfocus
-        # hyprbars
-      ];
+  wayland.windowManager.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+    systemd.enable = true;
+    extraConfig = ''
+      ${builtins.readFile (toConfigFile "hypr/hyprland.conf")}
+    '';
+    plugins = with pkgs.hyprlandPlugins; [
+      # hyprfocus
+      # hyprbars
+    ];
+  };
+  services.hyprpaper = {
+    enable = true;
+    settings = {
+      splash = true;
+      preload = [(toConfigFile "hypr/wallpaper.png")];
+      wallpaper = [''eDP-1, ${toConfigFile "hypr/wallpaper.png"}''];
     };
-    services.hyprpaper = {
-      enable = true;
-      settings = {
-        splash = true;
-        preload = [(toConfigFile "hypr/wallpaper.png")];
-        wallpaper = [''eDP-1, ${toConfigFile "hypr/wallpaper.png"}''];
-      };
-    };
-    programs.ags = {
-      enable = true;
-
-      # null or path, leave as null if you don't want hm to manage the config
-      configDir = toConfigFile "ags";
-
-      # additional packages to add to gjs's runtime
-      extraPackages = with pkgs; [
-        gtksourceview
-        webkitgtk
-        accountsservice
-      ];
-    };
+  };
+  # AGS Ayarları
+  imports = [inputs.ags.homeManagerModules.default]; 
+  programs.ags = {
+    enable = true;
+    configDir = toConfigFile "ags";
+    extraPackages = with pkgs; [
+      gtksourceview
+      webkitgtk
+      accountsservice
+    ];
+  };
 
   # direnv
   programs.direnv = {
-      enable = true;
-      nix-direnv.enable = true;
-    };
-
+    enable = true;
+    nix-direnv.enable = true;
+  };
   # zsh configuration
+  # Zeoxide
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+    options = [
+      "--cmd cd"
+    ];
+  };
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    enableAutosuggestions = true;
+    autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     completionInit = ''
-    zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 
-    zstyle ':completion:*' menu select 
+      zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+      zstyle ':completion:*' menu select
     '';
     shellAliases = {
       ".." = "cd ..";
       "re" = "echo sudo nixos-rebuild switch --flake /etc/nixos#default && sudo nixos-rebuild switch --flake /etc/nixos#default";
     };
     plugins = [
+      {
+        # will source zsh-autosuggestions.plugin.zsh
+        name = "vi-mode";
+        src = pkgs.zsh-vi-mode;
+        file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
+      }
       {
         # will source zsh-autosuggestions.plugin.zsh
         name = "zsh-autosuggestions";
@@ -200,16 +210,18 @@ in {
       }
     ];
     initExtra = ''
-    bindkey "''${key[Up]}" up-line-or-search
-    zstyle ':completion:*' menu no
-    zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-    zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+      bindkey "''${key[Up]}" up-line-or-search
+      zstyle ':completion:*' menu no
+      zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+      zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
     '';
   };
-  programs.fzf={
+  # FZF Config
+  programs.fzf = {
     enable = true;
     enableZshIntegration = true;
   };
+  # Starship Config
   programs.starship = {
     enable = true;
     # Configuration written to ~/.config/starship.toml
@@ -220,10 +232,11 @@ in {
       };
     };
   };
+  # Git Config
   programs.git = {
-  enable = true;
-  userName  = "DALLI-KAKTUS";
-  userEmail = "berked2003@hotmail.com";
+    enable = true;
+    userName = "DALLI-KAKTUS";
+    userEmail = "berked2003@hotmail.com";
   };
 
   # Nvim configuration
@@ -255,11 +268,6 @@ in {
         # Alpha
         plugin = alpha-nvim;
         config = toLua "require'alpha'.setup(require'alpha.themes.theta'.config)";
-      }
-      {
-        # Buffer line
-        plugin = bufferline-nvim;
-        config = toLua "require('bufferline').setup{}";
       }
       {
         #Flash
@@ -370,6 +378,11 @@ in {
           vim.keymap.set("n", "-", oil.toggle_float, {}) '';
       }
       {
+        # Bufferline
+        plugin = bufferline-nvim;
+        config = toLua ''require('bufferline').setup({}) '';
+      }
+      {
         # Treesitter
         plugin = nvim-treesitter.withAllGrammars;
         config = toLua ''
@@ -410,7 +423,7 @@ in {
         # UFO
         plugin = nvim-ufo;
         config = toLua ''
-          vim.opt.foldcolumn = '1'
+          vim.opt.foldcolumn = '0'
           vim.opt.foldlevel = 99
           vim.opt.foldlevelstart = 99
           vim.opt.foldenable = true
@@ -526,74 +539,72 @@ in {
 
     '';
   };
-  
+
   # LF configuration
-  xdg.configFile."lf/icons".source = toConfigFile "lf/icons" ;
-  xdg.configFile."lf/colors".source = toConfigFile "lf/colors" ;
+  xdg.configFile."lf/icons".source = toConfigFile "lf/icons";
+  xdg.configFile."lf/colors".source = toConfigFile "lf/colors";
   programs.lf = {
-      # icons file setup
-      enable = true;
-      commands = {
-        dragon-out = ''%${pkgs.xdragon}/bin/xdragon -a -x "$fx"'';
-        editor-open = ''$$EDITOR $f'';
-        mkdir = ''
+    # icons file setup
+    enable = true;
+    commands = {
+      q = "quit";
+      dragon-out = ''%${pkgs.xdragon}/bin/xdragon -a -x "$fx"'';
+      editor-open = ''$$EDITOR $f'';
+      mkdir = ''
         ''${{
           printf "Directory Name: "
           read DIR
           mkdir $DIR
         }}
-        '';
-      };
-      keybindings = {
-        "\\\"" = "";
-        o = "";
-        c = "mkdir";
-        "." = "set hidden!";
-        "`" = "mark-load";
-        "\\'" = "mark-load";
-        "<enter>" = "open";
-        do = "dragon-out";
-        "g~" = "cd";
-        gh = "cd";
-        "g/" = "/";
-        ee = "editor-open";
-        V = ''$${pkgs.bat}/bin/bat --paging=always --theme=gruvbox "$f"'';
-      };
-      settings = {
-        preview = true;
-        hidden = true;
-        drawbox = true;
-        icons = true;
-        ignorecase = true;
-        ifs = "\n";
-      };
-      # previewer setup
-      extraConfig = 
-        let 
-          previewer = 
-            pkgs.writeShellScriptBin "pv.sh" ''
-            file=$1
-            w=$2
-            h=$3
-            x=$4
-            y=$5
-            
-            if [[ "$( ${pkgs.file}/bin/file -Lb --mime-type "$file")" =~ ^image ]]; then
-                ${pkgs.kitty}/bin/kitty +kitten icat --silent --stdin no --transfer-mode file --place "''${w}x''${h}@''${x}x''${y}" "$file" < /dev/null > /dev/tty
-                exit 1
-            fi
-            
-            ${pkgs.pistol}/bin/pistol "$file"
-          '';
-          cleaner = pkgs.writeShellScriptBin "clean.sh" ''
-            ${pkgs.kitty}/bin/kitty +kitten icat --clear --stdin no --silent --transfer-mode file < /dev/null > /dev/tty
-          '';
-        in
-        ''
-          set cleaner ${cleaner}/bin/clean.sh
-          set previewer ${previewer}/bin/pv.sh
-        '';
-      };
+      '';
+    };
+    keybindings = {
+      "\\\"" = "";
+      o = "";
+      c = "mkdir";
+      "." = "set hidden!";
+      "`" = "mark-load";
+      "\\'" = "mark-load";
+      "<enter>" = "open";
+      "mo" = "dragon-out";
+      "g~" = "cd";
+      "gh" = "cd";
+      "g/" = "/";
+      "ee" = "editor-open";
+      V = ''$${pkgs.bat}/bin/bat --paging=always --theme=gruvbox "$f"'';
+    };
+    settings = {
+      preview = true;
+      hidden = true;
+      drawbox = true;
+      icons = true;
+      ignorecase = true;
+      ifs = "\n";
+    };
+    # previewer setup
+    extraConfig = let
+      previewer = pkgs.writeShellScriptBin "pv.sh" ''
+        file=$1
+        w=$2
+        h=$3
+        x=$4
+        y=$5
+
+        if [[ "$( ${pkgs.file}/bin/file -Lb --mime-type "$file")" =~ ^image ]]; then
+            ${pkgs.kitty}/bin/kitty +kitten icat --silent --stdin no --transfer-mode file --place "''${w}x''${h}@''${x}x''${y}" "$file" < /dev/null > /dev/tty
+            exit 1
+        fi
+
+        ${pkgs.pistol}/bin/pistol "$file"
+      '';
+      cleaner = pkgs.writeShellScriptBin "clean.sh" ''
+        ${pkgs.kitty}/bin/kitty +kitten icat --clear --stdin no --silent --transfer-mode file < /dev/null > /dev/tty
+      '';
+    in ''
+      set cleaner ${cleaner}/bin/clean.sh
+      set previewer ${previewer}/bin/pv.sh
+    '';
+  };
   # GTK configuration
   gtk = {
     enable = true;
@@ -610,119 +621,118 @@ in {
       name = "Adwaita";
     };
     theme = {
-        name = "adw-gtk3-dark";
-        package = pkgs.adw-gtk3;
+      name = "adw-gtk3-dark";
+      package = pkgs.adw-gtk3;
     };
     gtk3.extraConfig = {
-    gtk-application-prefer-dark-theme=1;
+      gtk-application-prefer-dark-theme = 1;
     };
     gtk4.extraConfig = {
-    gtk-application-prefer-dark-theme=1;
+      gtk-application-prefer-dark-theme = 1;
     };
   };
   qt = {
-      enable = true;
-      platformTheme.name = "adwaita";
-      style.name = "adwaita-dark";
+    enable = true;
+    platformTheme.name = "adwaita";
+    style.name = "adwaita-dark";
   };
-  programs.kitty ={
+  programs.kitty = {
     enable = true;
     settings = {
-    tab_bar_min_tabs = 1;
-    tab_bar_edge = "bottom";
-    tab_bar_style = "powerline";
-    tab_powerline_style = "slanted";
-    tab_title_template = "{title}{' :{}:'.format(num_windows) if num_windows > 1 else ''}";
-    cursor_shape = "block";
-    cursor_blink_interval = -1;
-    cursor_stop_blinking_after = 15;
-    strip_trailing_spaces = "smart";
-    url_prefixes = "http https gemini";
-    url_style = "curly";
-    background_opacity = "0.8";
+      tab_bar_min_tabs = 1;
+      tab_bar_edge = "top";
+      tab_bar_style = "powerline";
+      tab_powerline_style = "slanted";
+      tab_title_template = "{title}{' :{}:'.format(num_windows) if num_windows > 1 else ''}";
+      cursor_shape = "block";
+      cursor_blink_interval = -1;
+      cursor_stop_blinking_after = 15;
+      strip_trailing_spaces = "smart";
+      url_prefixes = "http https gemini";
+      url_style = "curly";
+      background_opacity = "0.8";
     };
     font.name = "VictorMono Nerd Font";
     font.size = 14;
     shellIntegration.enableZshIntegration = true;
     extraConfig = ''
-      # The basic colors
-      foreground              #cdd6f4
-      background              #1e1e2e
-      selection_foreground    #1e1e2e
-      selection_background    #f5e0dc
+        # The basic colors
+        foreground              #cdd6f4
+        background              #1e1e2e
+        selection_foreground    #1e1e2e
+        selection_background    #f5e0dc
 
-      # Cursor colors
-      cursor                  #f5e0dc
-      cursor_text_color       #1e1e2e
+        # Cursor colors
+        cursor                  #f5e0dc
+        cursor_text_color       #1e1e2e
 
-      # URL underline color when hovering with mouse
-      url_color               #f5e0dc
+        # URL underline color when hovering with mouse
+        url_color               #f5e0dc
 
-    # Kitty window border colors
-    active_border_color     #b4befe
-    inactive_border_color   #6c7086
-    bell_border_color       #f9e2af
+      # Kitty window border colors
+      active_border_color     #b4befe
+      inactive_border_color   #6c7086
+      bell_border_color       #f9e2af
 
-    # OS Window titlebar colors
-    wayland_titlebar_color system
-    macos_titlebar_color system
+      # OS Window titlebar colors
+      wayland_titlebar_color system
+      macos_titlebar_color system
 
-    # Tab bar colors
-    active_tab_foreground   #11111b
-    active_tab_background   #cba6f7
-    inactive_tab_foreground #cdd6f4
-    inactive_tab_background #181825
-    tab_bar_background      #11111b
+      # Tab bar colors
+      active_tab_foreground   #11111b
+      active_tab_background   #cba6f7
+      inactive_tab_foreground #cdd6f4
+      inactive_tab_background #181825
+      tab_bar_background      #11111b
 
-    # Colors for marks (marked text in the terminal)
-    mark1_foreground #1e1e2e
-    mark1_background #b4befe
-    mark2_foreground #1e1e2e
-    mark2_background #cba6f7
-    mark3_foreground #1e1e2e
-    mark3_background #74c7ec
+      # Colors for marks (marked text in the terminal)
+      mark1_foreground #1e1e2e
+      mark1_background #b4befe
+      mark2_foreground #1e1e2e
+      mark2_background #cba6f7
+      mark3_foreground #1e1e2e
+      mark3_background #74c7ec
 
-    # The 16 terminal colors
+      # The 16 terminal colors
 
-    # black
-    color0 #45475a
-    color8 #585b70
+      # black
+      color0 #45475a
+      color8 #585b70
 
-    # red
-    color1 #f38ba8
-    color9 #f38ba8
+      # red
+      color1 #f38ba8
+      color9 #f38ba8
 
-    # green
-    color2  #a6e3a1
-    color10 #a6e3a1
+      # green
+      color2  #a6e3a1
+      color10 #a6e3a1
 
-    # yellow
-    color3  #f9e2af
-    color11 #f9e2af
+      # yellow
+      color3  #f9e2af
+      color11 #f9e2af
 
-    # blue
-    color4  #89b4fa
-    color12 #89b4fa
+      # blue
+      color4  #89b4fa
+      color12 #89b4fa
 
-    # magenta
-    color5  #f5c2e7
-    color13 #f5c2e7
+      # magenta
+      color5  #f5c2e7
+      color13 #f5c2e7
 
-    # cyan
-    color6  #94e2d5
-    color14 #94e2d5
+      # cyan
+      color6  #94e2d5
+      color14 #94e2d5
 
-    # white
-    color7  #bac2de
-    color15 #a6adc8
+      # white
+      color7  #bac2de
+      color15 #a6adc8
     '';
   };
-    
+
   # QuteBrowser config
-    xdg.configFile."qutebrowser/config.py".source = toConfigFile "qutebrowser/config.py";
+  xdg.configFile."qutebrowser/config.py".source = toConfigFile "qutebrowser/config.py";
   # Btop configuration
-    # xdg.configFile."btop/btop.conf".source = toConfigFile "btop/btop.conf";
-    
+  # xdg.configFile."btop/btop.conf".source = toConfigFile "btop/btop.conf";
 
   # Cava Configuration
   # programs.cava= {
