@@ -20,25 +20,49 @@ in {
     qgroundcontrol
     arduino-ide
     arduino
+    (python311.withPackages (ps: with ps; [ # python paketleri
+      pyserial # esp32'nin çalışması için gerekli
+      scipy
+      pandas
+      joblib
+      tf-keras
+      tensorflow
+      keras
+      matplotlib
+      scikit-learn
+    ]))
     gradle
     logisim
     logisim-evolution
+    kicad
+    xschem
     processing
+    moreutils
     postgresql
-    kicad-small
     nodejs_22
     devenv
-    gnome.gnome-maps
-    nvidia-podman
+    gnome-maps
     distrobox
     p7zip
+    ghdl
+    gnumake
+    gtkwave
+    ttyplot
+    gnuplot
+    audacity
     # Multimedya
-    blender
     #davinci-resolve
+    kdenlive
+    handbrake
+    easyeffects
+    mousai
     gimp
     inkscape
+    krita
     obsidian
-    cura
+    #cura
+    orca-slicer
+    blender
     freecad
     amberol
     clapper
@@ -47,15 +71,16 @@ in {
     # Oyun ve Eğlence
     lutris
     spotify
-    obs-studio
     wireplumber
-    pipewire
     # Ofis ve İletişim
     thunderbird
     discord
-    libreoffice-qt
+    libreoffice-fresh
+    onlyoffice-desktopeditors
     zathura
     zoom-us
+    localsend
+    ferdium
     # unusefull
     cava
     figlet
@@ -63,12 +88,14 @@ in {
     cbonsai
     waydroid
     mission-center
+    exif
     # user interface
+    connman
     cliphist
     font-manager
     opentabletdriver
     man-pages
-    python3
+    libqalculate
     qalculate-qt
     libsForQt5.qt5ct
     qutebrowser
@@ -81,23 +108,20 @@ in {
     bat
     xdragon
     wl-clipboard
-    kitty
     #hyprland ui utils
     kdePackages.qt6ct
-    hyprpaper
     dunst
+    libnotify
     hyprshot
     bun
     dart-sass
     matugen
     swww
     hyprpicker
-    slurp
     wf-recorder
     wl-clipboard
-    wayshot
-    swappy
     supergfxctl
+
     #fusion 360
     darling
     darling-dmg
@@ -121,6 +145,37 @@ in {
     target = ".thunderbird";
     recursive = true;
   };
+    # dunst 
+  services.dunst = {
+      enable = true;
+      settings = {
+        global = {
+          width = 300;
+          height = 200;
+          offset = "30x50";
+          origin = "top-right";
+          transparency = 0;
+          padding = 20;
+          horizontal_padding = 20;
+          frame_color = "#89b4fa";
+          separator_color = "frame";
+        };
+
+        urgency_normal = {
+          background = "#1e1e2e";
+          foreground = "#cdd6f4";
+        };
+        urgency_low = {
+          background = "#1e1e2e";
+          foreground = "#cdd6f4";
+        };
+        urgency_critical = {
+          background = "#1e1e2e";
+          foreground = "#cdd6f4";
+          frame_color = "#fab387";
+        };
+      };
+    };
   # HYPRLAND CONFIG
   wayland.windowManager.hyprland = {
     enable = true;
@@ -130,30 +185,338 @@ in {
       ${builtins.readFile (toConfigFile "hypr/hyprland.conf")}
     '';
     plugins = with pkgs.hyprlandPlugins; [
-      # hyprfocus
-      # hyprbars
+      hyprfocus
+      hyprspace
     ];
   };
   services.hyprpaper = {
-    enable = true;
+    enable = false; #make it enable
     settings = {
       splash = true;
-      preload = [(toConfigFile "hypr/wallpaper.png")];
-      wallpaper = [''eDP-1, ${toConfigFile "hypr/wallpaper.png"}''];
+      preload = [(toConfigFile "hypr/cristmass.png")];
+      wallpaper = [''eDP-1, ${toConfigFile "hypr/cristmass.png"}''];
     };
   };
-  # AGS Ayarları
-  imports = [inputs.ags.homeManagerModules.default]; 
-  programs.ags = {
+  programs.obs-studio = {
     enable = true;
-    configDir = toConfigFile "ags";
-    extraPackages = with pkgs; [
-      gtksourceview
-      webkitgtk
-      accountsservice
+    plugins = with pkgs.obs-studio-plugins; [
+      wlrobs
+      obs-backgroundremoval
     ];
   };
+  # Rofi config
+  programs.rofi = {
+    enable = true;
+    package = pkgs.rofi-wayland;
+    plugins = with pkgs;[
+      #  rofi-calc
+    ];
+    theme =
+      let
+        inherit (config.lib.formats.rasi) mkLiteral;
+      in {
+        "*" = {
+          bg-col = mkLiteral "#1e1e2e";
+          bg-col-light = mkLiteral "#1e1e2e";
+          border-col = mkLiteral "#fab387";
+          selected-col = mkLiteral "#f38ba8";
+          blue = mkLiteral "#fab387"; # actually peach
+          fg-col = mkLiteral "#cdd6f4";
+          fg-col2 = mkLiteral "#f38ba8";
+          grey = mkLiteral "#6c7086";
+          width = 600;
+        };
 
+        "element-text, element-icon, mode-switcher" = {
+          background-color = mkLiteral "inherit";
+          text-color = mkLiteral "inherit";
+          horizontal-align = mkLiteral "0.5"; 
+        };
+        "window" = {
+          height = 360;
+          border = 4;
+          border-radius = 10;
+          border-color = mkLiteral "@border-col";
+          background-color = mkLiteral "@bg-col";
+          padding = mkLiteral "20px 20px 0px 20px";
+        };
+        "mainbox" = {
+          background-color = mkLiteral "@bg-col";
+        };
+        "inputbar" = {
+          children = mkLiteral "[prompt, entry]";
+          background-color = mkLiteral "@blue";
+          border-radius = 5;
+          padding = 2;
+        };
+        "prompt" = {
+          background-color = mkLiteral "@blue";
+          padding = 6;
+          text-color = mkLiteral "@bg-col";
+          border-radius = 3;
+          margin = mkLiteral "0px 0px 0px 0px";
+        };
+        "textbox-prompt-colon" = {
+          expand = false;
+          str = ":";
+        };
+        "entry" = {
+          padding = 6;
+          text-color = mkLiteral "@fg-col";
+          background-color = mkLiteral "@bg-col";
+        };
+        "listview" = {
+          border = mkLiteral "0px 0px 0px";
+          padding = mkLiteral "6px 0px 0px";
+          margin = mkLiteral "10px 0px 0px 20px";
+          columns = 4;
+          lines = 2;
+          background-color = mkLiteral "@bg-col";
+        };
+        "element" = {
+          padding = 10;
+          orientation = mkLiteral "vertical";
+          background-color = mkLiteral "@bg-col";
+          text-color = mkLiteral "@fg-col";
+        };
+        "element-icon" = {
+          size = 60;
+        };
+        "element selected" = {
+          background-color = mkLiteral "@selected-col";
+          text-color = mkLiteral "@bg-col";
+          border = 3;
+          border-color = mkLiteral "@fg-col2";
+          border-radius = 5;
+        };
+        "mode-switcher" = {
+          spacing = 0;
+        };
+        "button" = {
+          padding = 3;
+          background-color = mkLiteral "@bg-col-light";
+          text-color = mkLiteral "@grey";
+          vertical-align = mkLiteral "0.5";
+          horizontal-align = mkLiteral "0.5";
+        };
+        "button selected" = {
+          background-color = mkLiteral "@bg-col";
+          text-color = mkLiteral "@blue";
+        };
+        "message" = {
+          background-color = mkLiteral "@bg-col-light";
+          margin = 2;
+          padding = 2;
+          border-radius = 5;
+        };
+        "textbox" = {
+          padding = 6;
+          margin = "20px 0px 0px 20px";
+          text-color = mkLiteral "@blue";
+          background-color = mkLiteral "@bg-col-light";
+        };
+      };
+    extraConfig = {
+      modi = "drun,window,filebrowser";
+      icon-theme = "Adwaita";
+      show-icons = true;
+      terminal = "alacritty";
+      drun-display-format = "{icon} {name}";
+      location = 2;
+      disable-history = false;
+      hide-scrollbar = false;
+      display-drun = "  Apps ";
+      display-combi = "   Run ";
+      display-window = " 󰕰  Window ";
+      display-filebrowser = "   Files ";
+      display-Network = " 󰤨  Network ";
+      sidebar-mode = true;
+      /* keys have to be unbound before they can be reused */
+      kb-accept-entry = "Return,KP_Enter";
+      kb-remove-to-eol = "";
+      kb-remove-char-back = "BackSpace,Shift+BackSpace";
+      kb-mode-complete = "";
+      /* better vim controls */
+      kb-row-down = "J,Ctrl+j,Alt+j,Down";
+      kb-row-up = "K,Ctrl+k,Alt+k,Up";
+      kb-row-left = "H,Ctrl+h,Alt+h";
+      kb-row-right = "L,Ctrl+l,Alt+l";
+      kb-mode-next = "Ctrl+w";
+      kb-clear-line = "";
+    };
+  };
+  # Waybar canfig
+  programs.waybar = {
+    enable = true;
+    systemd = {
+      enable = false;
+      target = "graphical-session.target";
+    };
+    settings = {
+      mainBar = {
+        layer = "top";
+        modules-left = [ "custom/nix" "hyprland/workspaces" "custom/cava-internal"];
+        modules-center = [ "clock" ];
+        modules-right = [ "cpu" "memory" "backlight" "pulseaudio" "bluetooth" "network" "battery" ];
+
+        "custom/nix" = {
+          "format" = "   ";
+          "tooltip" = false;
+          "on-click" = "rofi -location 1 -show drun";
+          "on-click-right" = "rofi -location 1 -show drun";
+        };
+        "hyprland/workspaces" = {
+          "format" = "{icon}";
+          "all-outputs" = true;
+          "format-icons" = {
+            "1" = "一";
+            "2" = "二";
+            "3" = "三";
+            "4" = "四";
+            "5" = "五";
+            "6" = "六"; 
+            "7" = "七"; 
+            "8" = "八"; 
+            "9" = "九"; 
+            "10" = "十";
+          };
+        };
+        "custom/cava-internal" = {
+          "exec" = "sleep 1s && cava-internal";
+          "tooltip" = false;
+        };
+
+        "clock" = {
+          "format" = "<span color='#b4befe'> </span>{:%H.%M}";
+          "tooltip" = true;
+          "tooltip-format" = "{:%Y-%m-%d %a}";
+        };
+
+        "cpu" = { 
+          "format" = "<span color='#b4befe'> </span>{usage}%"; 
+          "on-click" = "missioncenter";
+        };
+        "memory" = {
+          "interval" = 1;
+          "format" = "<span color='#b4befe'> </span>{used:0.1f}G/{total:0.1f}G";
+          "on-click" = "missioncenter";
+        };
+        "backlight" = {
+          "device" = "intel_backlight";
+          "format" = "<span color='#b4befe'>{icon}</span> {percent}%";
+          "format-icons" = ["" "" "" "" "" "" "" "" ""];
+        };
+        "pulseaudio"= {
+          "format" = "<span color='#b4befe'>{icon}</span> {volume}%";
+          "format-muted" = "";
+          "tooltip" = false;
+          "format-icons" = {
+            "headphone" = "";
+            "default" = ["" "" "󰕾" "󰕾" "󰕾" "" "" ""];
+          };
+          "scroll-step" = 1;
+          "on-click" = "pavucontrol";
+        };
+        "bluetooth" = {
+          "format" = "<span color='#b4befe'></span> {status}";
+          "format-disabled" = "";
+          "format-connected" = "<span color='#b4befe'></span> {num_connections}";
+          "tooltip-format" = "{device_enumerate}";
+          "tooltip-format-enumerate-connected" = "{device_alias}   {device_address}";
+          "on-click" = "blueman-manager";
+        };
+        "network" = {
+          "interface" = "wlp4s0";
+          "format" = "{ifname}";
+          "format-wifi" = "<span color='#b4befe'> </span>{essid}";
+          "format-ethernet" = "{ipaddr}/{cidr} ";
+          "format-disconnected" = "<span color='#b4befe'>󰖪 </span>No Network";
+          "tooltip" = false;
+        };
+        "battery" = {
+          "format" = "<span color='#b4befe'>{icon}</span> {capacity}%";
+          "format-icons" =  ["" "" "" "" ""];
+          "format-charging" = "<span color='#a6e3a1'></span> {capacity}%";
+          "tooltip" = false;
+        };
+      };
+    };
+
+    style = ''
+      * {
+        border: none;
+        font-family: 'VictorMono Nerd Font Medium';
+        font-size: 16px;
+        font-feature-settings: '"zero", "ss01", "ss02", "ss03", "ss04", "ss05", "cv31"';
+        min-height: 30px;
+      }
+
+      window#waybar {
+        background: transparent;
+      }
+
+      #custom-nix, 
+      #workspaces {
+        border-radius: 10px;
+        background-color: #11111b;
+        color: #fab387;
+        margin-top: 1px;
+        margin-right: 15px;
+        padding-top: 1px;
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+
+      #custom-nix {
+        font-size: 20px;
+        margin-left: 15px;
+        color: #fab387;
+      }
+
+      #custom-cava-internal {
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 1px;
+        font-family: "Hack Nerd Font";
+        color: #b4befe;
+        background-color: #11111b;
+        margin-top: 1px;
+        border-radius: 10px;
+      }
+
+      #workspaces button.active {
+        background:  #fab387;
+        color: #11111b;
+      }
+
+      #clock, #backlight, #pulseaudio, #bluetooth, #network, #battery, #cpu, #memory{
+        border-radius: 10px;
+        background-color: #11111b;
+        color: #cdd6f4;
+        margin-top: 1px;
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-right: 15px;
+      }
+
+      #backlight, #bluetooth {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        padding-right: 5px;
+        margin-right: 0
+      }
+
+      #pulseaudio, #network {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        padding-left: 5px;
+      }
+
+      #clock {
+        margin-right: 0;
+      }
+  '';
+  };
   # direnv
   programs.direnv = {
     enable = true;
@@ -179,6 +542,7 @@ in {
     '';
     shellAliases = {
       ".." = "cd ..";
+      ":q" = "exit";
       "re" = "echo sudo nixos-rebuild switch --flake /etc/nixos#default && sudo nixos-rebuild switch --flake /etc/nixos#default";
     };
     plugins = [
@@ -290,6 +654,12 @@ in {
         '';
       }
       {
+        # vim-surround
+        plugin = vim-surround;
+        config = toLua ''
+        '';
+      }
+      {
         #İndent Blankline
         plugin = indent-blankline-nvim;
         config = toLua ''
@@ -335,7 +705,7 @@ in {
         config = toLua ''
           local capabilities = require('cmp_nvim_lsp').default_capabilities()
           local lspconfig = require("lspconfig")
-          lspconfig.tsserver.setup({
+          lspconfig.ts_ls.setup({
              capabilities = capabilities})
           lspconfig.solargraph.setup({
              capabilities = capabilities})
@@ -376,11 +746,6 @@ in {
           local oil = require("oil")
           oil.setup()
           vim.keymap.set("n", "-", oil.toggle_float, {}) '';
-      }
-      {
-        # Bufferline
-        plugin = bufferline-nvim;
-        config = toLua ''require('bufferline').setup({}) '';
       }
       {
         # Treesitter
@@ -465,6 +830,11 @@ in {
         config = toLua ''vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)'';
       }
       {
+        # Bufferline
+        plugin = bufferline-nvim;
+        config = toLua ''require('bufferline').setup({}) '';
+      }
+      {
         # catpuccin
         plugin = catppuccin-nvim;
         config = toLua ''vim.cmd.colorscheme "catppuccin-mocha"'';
@@ -513,6 +883,8 @@ in {
     ];
 
     extraConfig = ''
+      nnoremap <SPACE> <Nop>
+      map <Space> <leader>
       set expandtab
       set tabstop=2
       set softtabstop=2
@@ -540,71 +912,10 @@ in {
     '';
   };
 
-  # LF configuration
-  xdg.configFile."lf/icons".source = toConfigFile "lf/icons";
-  xdg.configFile."lf/colors".source = toConfigFile "lf/colors";
-  programs.lf = {
-    # icons file setup
-    enable = true;
-    commands = {
-      q = "quit";
-      dragon-out = ''%${pkgs.xdragon}/bin/xdragon -a -x "$fx"'';
-      editor-open = ''$$EDITOR $f'';
-      mkdir = ''
-        ''${{
-          printf "Directory Name: "
-          read DIR
-          mkdir $DIR
-        }}
-      '';
+  # YAZI File Manager
+    programs.yazi = {
+      enable =true;
     };
-    keybindings = {
-      "\\\"" = "";
-      o = "";
-      c = "mkdir";
-      "." = "set hidden!";
-      "`" = "mark-load";
-      "\\'" = "mark-load";
-      "<enter>" = "open";
-      "mo" = "dragon-out";
-      "g~" = "cd";
-      "gh" = "cd";
-      "g/" = "/";
-      "ee" = "editor-open";
-      V = ''$${pkgs.bat}/bin/bat --paging=always --theme=gruvbox "$f"'';
-    };
-    settings = {
-      preview = true;
-      hidden = true;
-      drawbox = true;
-      icons = true;
-      ignorecase = true;
-      ifs = "\n";
-    };
-    # previewer setup
-    extraConfig = let
-      previewer = pkgs.writeShellScriptBin "pv.sh" ''
-        file=$1
-        w=$2
-        h=$3
-        x=$4
-        y=$5
-
-        if [[ "$( ${pkgs.file}/bin/file -Lb --mime-type "$file")" =~ ^image ]]; then
-            ${pkgs.kitty}/bin/kitty +kitten icat --silent --stdin no --transfer-mode file --place "''${w}x''${h}@''${x}x''${y}" "$file" < /dev/null > /dev/tty
-            exit 1
-        fi
-
-        ${pkgs.pistol}/bin/pistol "$file"
-      '';
-      cleaner = pkgs.writeShellScriptBin "clean.sh" ''
-        ${pkgs.kitty}/bin/kitty +kitten icat --clear --stdin no --silent --transfer-mode file < /dev/null > /dev/tty
-      '';
-    in ''
-      set cleaner ${cleaner}/bin/clean.sh
-      set previewer ${previewer}/bin/pv.sh
-    '';
-  };
   # GTK configuration
   gtk = {
     enable = true;
@@ -614,10 +925,10 @@ in {
       size = 24;
     };
     font = {
-      name = "VictorMono Nerd Font";
+      name = "VictorMono Nerd Font Medium";
     };
     iconTheme = {
-      package = pkgs.gnome.adwaita-icon-theme;
+      package = pkgs.adwaita-icon-theme;
       name = "Adwaita";
     };
     theme = {
@@ -639,7 +950,7 @@ in {
   programs.kitty = {
     enable = true;
     settings = {
-      tab_bar_min_tabs = 1;
+      tab_bar_min_tabs = 2;
       tab_bar_edge = "top";
       tab_bar_style = "powerline";
       tab_powerline_style = "slanted";
@@ -652,7 +963,7 @@ in {
       url_style = "curly";
       background_opacity = "0.8";
     };
-    font.name = "VictorMono Nerd Font";
+    font.name = "VictorMono Nerd Font Medium";
     font.size = 14;
     shellIntegration.enableZshIntegration = true;
     extraConfig = ''
@@ -680,7 +991,7 @@ in {
 
       # Tab bar colors
       active_tab_foreground   #11111b
-      active_tab_background   #cba6f7
+      active_tab_background   #fab387
       inactive_tab_foreground #cdd6f4
       inactive_tab_background #181825
       tab_bar_background      #11111b
@@ -756,6 +1067,7 @@ in {
 
   home.sessionVariables = {
     EDITOR = "nvim";
+    GSK_RENDERER = "gl";
   };
 
   programs.home-manager.enable = true; # Let Home Manager install and manage itself.

@@ -6,14 +6,15 @@
   ...
 }: {
   services.xserver.enable = true; # X sunucusunu etkinleştir
+  services.xserver.displayManager.startx.enable = true; # startx'i etkinleştir
+  services.xserver.autorun = true; # Otomatik başlatmayı etkinleştir
   services.xserver.displayManager.gdm = {
     enable = true; # GDM (GNOME Display Manager) etkinleştir
     wayland = true; # Wayland kullan
   };
-  services.xserver.desktopManager.xfce.enable = true; # XFCE masaüstü ortamını etkinleştir
-  services.xserver.displayManager.startx.enable = true; # startx'i etkinleştir
-  services.xserver.autorun = true; # Otomatik başlatmayı etkinleştir
+  programs.dconf.enable = true;
   programs.hyprland.enable = true; #hyprlandi etkinleştir
+  services.upower.enable = true; # ags için upower etkinleştir
   imports = [
     # Donanım taramasının sonuçlarını dahil et.
     inputs.home-manager.nixosModules.default
@@ -25,12 +26,23 @@
 
   # Unfree Paketler
   nixpkgs.config.allowUnfree = true; # Unfree paketlere izin ver
-
+  # bozuk paketler
+  nixpkgs.config.allowBroken = true;
+  # güvenli olmayan paketler
+  nixpkgs.config.permittedInsecurePackages = [
+    "dotnet-runtime-6.0.36"
+    "dotnet-sdk-wrapped-6.0.428"
+    "dotnet-sdk-6.0.428"
+  ];
   # Flatpak
   services.flatpak.enable = true; # Flatpak'ı etkinleştir
   xdg.portal = {
     enable = true; # XDG portalını etkinleştir
-    extraPortals = [pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-wlr]; # Ek portal tanımları
+    xdgOpenUsePortal = true;
+      extraPortals = [
+        pkgs.xdg-desktop-portal-gtk
+        pkgs.xdg-desktop-portal-hyprland
+      ];
   };
 
   # Home Manager
@@ -51,14 +63,15 @@
   nix.extraOptions = ''
     trusted-users = root Kaktus # Güvenilir kullanıcılar
   '';
+
   # Steam
   programs.java.enable = true; # Java'yı etkinleştir
   programs.steam.enable = true; # Steam'i etkinleştir
-
+  programs.gamescope.enable = true;
   # Kullanıcı hesabı tanımlama. Şifreyi 'passwd' ile ayarlamayı unutmayın.
   users.users.Kaktus = {
     isNormalUser = true; # Normal kullanıcı olarak tanımla
-    extraGroups = ["wheel" "netdev" "networkmanager"]; # Kullanıcıya 'sudo' erişimi sağla
+    extraGroups = ["podman" "input" "uinput" "wheel" "netdev" "networkmanager"]; # Kullanıcıya 'sudo' erişimi sağla (input ve uinput kanata için gerekli)
     packages = with pkgs; [
       firefox # Firefox tarayıcısını ekle
     ];
@@ -81,8 +94,6 @@
   };
 
   environment.sessionVariables = {
-    # İmlecin görünmez hale gelmesi durumunda
-    WLR_NO_HARDWARE_CURSORS = "1"; # Donanım imlecini devre dışı bırak
     # Electron uygulamalarının Wayland kullanmasını sağla
     NIXOS_OZONE_WL = "1"; # Wayland için Ozone desteği
   };
@@ -100,15 +111,15 @@
   virtualisation = {
     podman = {
       enable = true; # Podman'ı etkinleştir
-      # Podman'ı, Docker ile birlikte kullanılacak şekilde yapılandır
-      dockerCompat = true; 
-      # Podman-compose ile oluşturulan konteynerlerin birbiriyle iletişim kurabilmesi için gerekli
-      defaultNetwork.settings.dns_enabled = true;
+      dockerCompat = true; # Podman'ı, Docker ile birlikte kullan
+      defaultNetwork.settings.dns_enabled = true; # Podman-compose ile oluşturulan konteynerler için gerekli
+
     };
   };
 
-  # $ nix search wget
+  # search with $ nix search <package>
   environment.systemPackages = with pkgs; [
+    
     neovim # Neovim metin editörü
     kate # Yapılandırma.nix dosyasını düzenlemek için bir editör ekle
     # Soğuk başlatma için
@@ -119,9 +130,9 @@
     git # Git sürüm kontrol aracı
     tree # Ağaç yapısını görüntülemek için
     home-manager # Home Manager
-    lf # Listeler için bir dosya yöneticisi
     fd # Hızlı dosya bulucu
-    # Ses paketleri
+    python311 # python
+  # Ses paketleri
     alsa-utils # ALSA araçları
     alsa-tools # ALSA araçları
     pulseaudio-ctl # PulseAudio kontrol aracı
@@ -147,6 +158,7 @@
     xorg.xeyes # X göz simülatörü
     lm_sensors # Donanım sensörleri
     unzip # ZIP dosyalarını çıkarmak için
+    zip
     gcc_multi # Çoklu GCC desteği
     pciutils # PCI cihaz bilgileri
     lm_sensors # Donanım sensörleri (tekrar eklenmiş, gereksiz olabilir)

@@ -8,7 +8,8 @@
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
   services.usbmuxd.enable = true; # USB Muxer servisini etkinleştir
-
+  # Kernel
+  #boot.kernelPackages = pkgs.linuxPackages_zen;
   # GRUB EFI önyükleyicisini kullan.
   boot.loader.systemd-boot.enable = false; # systemd-boot'u devre dışı bırak
   boot.loader.grub.enable = true; # GRUB'u etkinleştir
@@ -29,7 +30,9 @@
     footer = true; # Alt bilgi ekle
     customResolution = "1920x1080"; # Özel çözünürlük ayarı (isteğe bağlı)
   };
-
+  # suspend sonrası uyandırmada hyprland hata vermesin diye
+  boot.kernelParams= [
+  ];
   # Ağ ayarları
   # networking.hostName = "DALLI_KAKTUS"; # Ana bilgisayar adını tanımla
   networking.networkmanager.enable = true; # NetworkManager'ı etkinleştir
@@ -50,9 +53,30 @@
     font = "Lat2-Terminus16"; # Konsol yazı tipi
     useXkbConfig = true; # TTY'de xkb ayarlarını kullan
   };
-
+  # Mouse aksiyonlrı
+  programs.mouse-actions.enable = true;
   # Klavye ayarları
   services.xserver.xkb.layout = "tr"; # Türkçe klavye düzeni
+  # kanata için gerekli ayarlar
+    services.kanata = {
+    enable = true;
+    keyboards = {
+      "internalKeyboard".config = ''
+        (defsrc
+          esc
+          caps
+          lctl
+
+        )
+
+        (deflayer colemak
+          caps
+          esc
+          lctl
+        )
+      '';
+    };
+  };
 
   # Yazıcıları etkinleştir
   services.printing.enable = true; # CUPS ile belgeleri yazdırmayı etkinleştir
@@ -61,9 +85,11 @@
   # hardware.pulseaudio.enable = true; # PulseAudio'yu etkinleştir
   # OR
   hardware.pulseaudio.enable = false; # PulseAudio'yu devre dışı bırak
+  security.rtkit.enable = true;
   services.pipewire = {
     enable = true; # PipeWire'ı etkinleştir
     alsa.enable = true; # ALSA'yı etkinleştir
+    wireplumber.enable = true; # wireplumber'ı etkinleştir 
     alsa.support32Bit = true; # 32 bit desteği
     pulse.enable = true; # Pulse desteğini etkinleştir
   };
@@ -87,16 +113,34 @@
 
   # Blueman'ı etkinleştir
   services.blueman.enable = true; # Bluetooth yöneticisi
+  # Güç Yönetimi
+  services.tlp = {
+        enable = true;
+        settings = {
+          CPU_SCALING_GOVERNOR_ON_AC = "performance";
+          CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
 
-  # NVIDIA ayarları
-  hardware.opengl = {
-    enable = true; # OpenGL desteğini etkinleştir
+          CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+          CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+
+          CPU_MIN_PERF_ON_AC = 0;
+          CPU_MAX_PERF_ON_AC = 100;
+          CPU_MIN_PERF_ON_BAT = 0;
+          CPU_MAX_PERF_ON_BAT = 50;
+
+         #Optional helps save long term battery health
+         #START_CHARGE_THRESH_BAT0 = 40; # 40 and bellow it starts to charge
+         #STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging
+
+        };
   };
-
+  # NVIDIA ayarları
+  hardware.graphics.enable = true;
+  
   # Xorg ve Wayland için NVIDIA sürücülerini yükle
   services.xserver.videoDrivers = [
     "nvidia" # NVIDIA sürücüsü
-    "vmware" # VMware sürücüsü
+    #"vmware" # VMware sürücüsü
   ];
 
   hardware.nvidia = {
@@ -104,7 +148,7 @@
     modesetting.enable = true; # Modesetting'i etkinleştir
 
     # NVIDIA güç yönetimi. Deneysel, uyku/askıya alma sorunlarına yol açabilir.
-    powerManagement.enable = false; # Güç yönetimini devre dışı bırak
+    powerManagement.enable = true; # Güç yönetimini devre dışı bırak
     powerManagement.finegrained = false; # İnce güç yönetimini devre dışı bırak
 
     # NVidia açık kaynaklı çekirdek modülünü kullan
@@ -126,49 +170,5 @@
     };
   };
 
-  # TLP hizmetlerini etkinleştir
   services.thermald.enable = true; # Termal yönetimi etkinleştir
-  services.tlp = {
-    enable = true; # TLP'yi etkinleştir
-    settings = {
-      CPU_SCALING_GOVERNOR_ON_AC = "performance"; # AC'de CPU ölçeklendirme yöneticisi
-      CPU_SCALING_GOVERNOR_ON_BAT = "powersave"; # Bataryada CPU ölçeklendirme yöneticisi
-
-      CPU_ENERGY_PERF_POLICY_ON_BAT = "power"; # Bataryada enerji performans politikası
-      CPU_ENERGY_PERF_POLICY_ON_AC = "performance"; # AC'de enerji performans politikası
-
-      CPU_MIN_PERF_ON_AC = 0; # AC'de minimum performans
-      CPU_MAX_PERF_ON_AC = 100; # AC'de maksimum performans
-      CPU_MIN_PERF_ON_BAT = 0; # Bataryada minimum performans
-      CPU_MAX_PERF_ON_BAT = 20; # Bataryada maksimum performans
-
-      # Uzun vadeli batarya sağlığına yardımcı olmak için isteğe bağlı
-      START_CHARGE_THRESH_BAT0 = 40; # 40 ve altındaki değerlerde şarj başlat
-      STOP_CHARGE_THRESH_BAT0 = 80; # 80 ve üzerindeki değerlerde şarjı durdur
-    };
-  };
-
-  # Bazı programlar SUID sarıcılarına ihtiyaç duyar, daha fazla yapılandırılabilir veya
-  # kullanıcı oturumlarında başlatılabilir.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # Hangi servisleri etkinleştirmek istediğinizi listeleyin:
-
-  # OpenSSH daemon'unu etkinleştir.
-  # services.openssh.enable = true;
-
-  # Güvenlik duvarında açık portları ayarla.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Ya da güvenlik duvarını tamamen devre dışı bırak.
-  # networking.firewall.enable = false;
-
-  # NixOS yapılandırma dosyasını kopyala ve sonuç sistemden bağlantı kur
-  # (/run/current-system/configuration.nix). Bu, yanlışlıkla yapılandırma.nix dosyasını silerseniz
-  # yararlıdır.
-  # system.copySystemConfiguration = true;
 }
