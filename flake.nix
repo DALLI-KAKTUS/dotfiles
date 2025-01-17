@@ -14,10 +14,13 @@
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
+      host = "default";
     in {
-       nixosConfigurations.default = lib.nixosSystem {
+       nixosConfigurations."${host}" = lib.nixosSystem {
+          specialArgs = {
           inherit system;
-          specialArgs = {inherit inputs;};
+          inherit inputs;
+          };
           modules = [
             ./default/hardware-configuration.nix
             ./default/core-configuration.nix

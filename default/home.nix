@@ -320,7 +320,7 @@ in {
       modi = "drun,window,filebrowser";
       icon-theme = "Adwaita";
       show-icons = true;
-      terminal = "alacritty";
+      terminal = "kitty";
       drun-display-format = "{icon} {name}";
       location = 2;
       disable-history = false;
@@ -345,7 +345,7 @@ in {
       kb-clear-line = "";
     };
   };
-  # Waybar canfig
+  # Waybar canfig disabled because most of the time i am using hyprpanel
   programs.waybar = {
     enable = true;
     systemd = {
@@ -1066,6 +1066,7 @@ in {
   };
 
   home.sessionVariables = {
+    TERM = "kitty";
     EDITOR = "nvim";
     GSK_RENDERER = "gl";
   };
