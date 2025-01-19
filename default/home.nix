@@ -60,6 +60,7 @@ in {
     inkscape
     krita
     obsidian
+    lorien
     #cura
     orca-slicer
     blender
@@ -82,6 +83,7 @@ in {
     localsend
     ferdium
     # unusefull
+    peaclock
     cava
     figlet
     cowsay
@@ -121,7 +123,6 @@ in {
     wf-recorder
     wl-clipboard
     supergfxctl
-
     #fusion 360
     darling
     darling-dmg
@@ -547,7 +548,7 @@ in {
     };
     plugins = [
       {
-        # will source zsh-autosuggestions.plugin.zsh
+        # will source vi-mode plugin
         name = "vi-mode";
         src = pkgs.zsh-vi-mode;
         file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
@@ -602,7 +603,14 @@ in {
     userName = "DALLI-KAKTUS";
     userEmail = "berked2003@hotmail.com";
   };
-
+  # zellij config
+  xdg.configFile."zellij/config.kdl".source = toConfigFile "zellij/config.kdl";
+  xdg.configFile."zellij/layouts/default.kdl".source = toConfigFile "zellij/layouts/default.kdl";
+  programs.zellij = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+  
   # Nvim configuration
   programs.neovim = let
     toLua = str: "lua << EOF\n${str}\nEOF\n";

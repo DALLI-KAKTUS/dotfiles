@@ -141,7 +141,6 @@
     bluetuith # Bluetooth yönetimi için
     bluez-tools # BlueZ araçları
     # Sistem araçları
-    intel-gpu-tools # Intel GPU araçları
     gparted # Disk bölümlerini yönetmek için
     gptfdisk # GPT disk bölümleri için
     htop # Etkileşimli sistem izleyici
@@ -171,6 +170,12 @@
     tldr # Kısa komut açıklamaları
     steam-run # Steam oyunlarını başlatmak için
     glxinfo # GLX bilgi aracı
+    clinfo
+    gwe
+    nvtop-nvidia
+    virtualglLib
+    vulkan-loader
+    vulkan-tools
     openssl # ssl sertifika aracı
   ];
 

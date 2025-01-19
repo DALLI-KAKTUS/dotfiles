@@ -9,7 +9,7 @@
 
   services.usbmuxd.enable = true; # USB Muxer servisini etkinleştir
   # Kernel
-  #boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot.kernelPackages = pkgs.linuxPackages_zen;
   # GRUB EFI önyükleyicisini kullan.
   boot.loader.systemd-boot.enable = false; # systemd-boot'u devre dışı bırak
   boot.loader.grub.enable = true; # GRUB'u etkinleştir
@@ -27,6 +27,7 @@
   boot.loader.grub2-theme = {
     enable = true; # GRUB temasını etkinleştir
     theme = "tela"; # Tema adı
+    icon = "color";
     footer = true; # Alt bilgi ekle
     customResolution = "1920x1080"; # Özel çözünürlük ayarı (isteğe bağlı)
   };
@@ -136,33 +137,46 @@
   };
   # NVIDIA ayarları
   hardware.graphics.enable = true;
-  
+  #intel için ek paketler
+  hardware.graphics.extraPackages = with pkgs; [
+    intel-gpu-tools
+    intel-media-driver
+    vpl-gpu-rt
+    libvdpau-va-gl
+    nvidia-vaapi-driver
+    vaapiIntel
+    vaapiVdpau
+    vulkan-validation-layers
+  ];
   # Xorg ve Wayland için NVIDIA sürücülerini yükle
   services.xserver.videoDrivers = [
     "nvidia" # NVIDIA sürücüsü
+    "modesetting" # Intel Sürücüsü
     #"vmware" # VMware sürücüsü
   ];
 
   hardware.nvidia = {
     # Modesetting gereklidir.
     modesetting.enable = true; # Modesetting'i etkinleştir
-
+    nvidiaPersistenced = true;
     # NVIDIA güç yönetimi. Deneysel, uyku/askıya alma sorunlarına yol açabilir.
     powerManagement.enable = true; # Güç yönetimini devre dışı bırak
-    powerManagement.finegrained = false; # İnce güç yönetimini devre dışı bırak
-
+    powerManagement.finegrained = true; # İnce güç yönetimini devre dışı bırak
     # NVidia açık kaynaklı çekirdek modülünü kullan
     open = false; # Kapalı sürüm kullan
-
     # NVIDIA ayarları menüsünü etkinleştir
     nvidiaSettings = true; # nvidia-settings erişimi
 
     # GPU'nuz için uygun sürücü sürümünü seçin.
-    package = config.boot.kernelPackages.nvidiaPackages.stable; # Stabil NVIDIA paketi
+    package = config.boot.kernelPackages.nvidiaPackages.production; # Stabil NVIDIA paketi
 
     prime = {
-      # Senkronizasyon modu kullanılıyor, gerekirse offload modu denenecek
-      sync.enable = true; # Senkronizasyonu etkinleştir
+      # ooffload modu kullanılıyor, gerekirse sync modu denenecek
+      offload = {
+        enable = true;
+        enableOffloadCmd = true;
+      };
+      sync.enable = false; # Senkronizasyonu etkinleştir
       # Sisteminiz için doğru Bus ID değerlerini kullandığınızdan emin olun!
       intelBusId = "PCI:0:2:0"; # Intel Bus ID
       nvidiaBusId = "PCI:1:0:0"; # NVIDIA Bus ID
