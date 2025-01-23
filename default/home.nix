@@ -82,6 +82,7 @@ in {
     zoom-us
     localsend
     ferdium
+    nemo
     # unusefull
     peaclock
     cava
@@ -99,6 +100,8 @@ in {
     man-pages
     libqalculate
     qalculate-qt
+    cemu-ti
+    firebird-emu
     libsForQt5.qt5ct
     qutebrowser
     ripgrep

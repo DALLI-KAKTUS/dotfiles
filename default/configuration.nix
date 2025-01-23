@@ -30,10 +30,7 @@
   nixpkgs.config.allowBroken = true;
   # güvenli olmayan paketler
   nixpkgs.config.permittedInsecurePackages = [
-    "dotnet-runtime-6.0.36"
-    "dotnet-sdk-wrapped-6.0.428"
-    "dotnet-sdk-6.0.428"
-  ];
+     ];
   # Flatpak
   services.flatpak.enable = true; # Flatpak'ı etkinleştir
   xdg.portal = {
@@ -63,7 +60,8 @@
   nix.extraOptions = ''
     trusted-users = root Kaktus # Güvenilir kullanıcılar
   '';
-
+  # for running binary packages
+  programs.nix-ld.enable = true;
   # Steam
   programs.java.enable = true; # Java'yı etkinleştir
   programs.steam.enable = true; # Steam'i etkinleştir
@@ -177,6 +175,7 @@
     vulkan-loader
     vulkan-tools
     openssl # ssl sertifika aracı
+    nix-alien
   ];
 
   system.stateVersion = "24.05"; # Yorum: Bu yapılandırma, NixOS 24.05 sürümüne uygun
