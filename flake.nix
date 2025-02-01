@@ -1,38 +1,51 @@
 {
-  description = "Nixos config flake";
-
+  description = "my minimal flake";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-alien.url = "github:thiagokokada/nix-alien";
-    grub2-themes.url = "github:vinceliuice/grub2-themes";
-    waveforms.url = "github:liff/waveforms-flake";
+    # Controls system level software and settings including fonts
+    darwin.url = "github:lnl7/nix-darwin/nix-darwin-24.11";
+    darwin.inputs.nixpkgs.follows = "nixpkgs";
+    # For spotlight search
+    mac-app-util.url = "github:hraban/mac-app-util";
   };
-  outputs = { self, nixpkgs, home-manager, grub2-themes, waveforms, nix-alien, ... }@inputs:
-    let
-      lib = nixpkgs.lib;
-      system = "x86_64-linux";
-      host = "default";
-    in {
-       nixosConfigurations."${host}" = lib.nixosSystem {
-          specialArgs = {
-          inherit system;
-          inherit inputs;
+
+  outputs = {
+    self,
+    nixpkgs,
+    home-manager,
+    darwin,
+    mac-app-util,
+    ...
+  } @ inputs: let
+    lib = darwin.lib;
+    host = "macOS";
+    system = "aarch64-darwin";
+  in {
+    darwinConfigurations."${host}" = lib.darwinSystem {
+      inherit system;
+      modules = [
+        ./brew-pkgs.nix
+        ./darwin-settings.nix
+        mac-app-util.darwinModules.default
+        inputs.home-manager.darwinModules.home-manager
+        {
+          users.users.kaktus.home = "/Users/kaktus";
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            users.kaktus.imports = [
+              ./home-settings.nix
+              ./home-programs.nix
+              mac-app-util.homeManagerModules.default
+              {home.stateVersion = "24.11";}
+            ];
           };
-          modules = [
-            ./default/hardware-configuration.nix
-            ./default/core-configuration.nix
-            ./default/configuration.nix
-            grub2-themes.nixosModules.default
-            home-manager.nixosModules.default
-            waveforms.nixosModule # digilent waveforms flake for analog discovery 3
-            ({ users.users.Kaktus.extraGroups = [ "plugdev" ]; })
-            #nix-alien
-            ({nixpkgs.overlays = [ self.inputs.nix-alien.overlays.default];})
-          ];
-       };
+        }
+      ];
     };
+  };
 }

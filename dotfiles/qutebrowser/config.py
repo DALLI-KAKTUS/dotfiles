@@ -12,7 +12,7 @@
 
 ## This is here so configs done via the GUI are still loaded.
 ## Remove it to not load settings done via the GUI.
-config.load_autoconfig(True)
+config.load_autoconfig(False)
 def setup(c, flavour, samecolorrows = False):
     palette = {}
 
@@ -1875,7 +1875,7 @@ c.url.searchengines = {'DEFAULT': 'https://google.com/search?q={}'}
 ## Hide the window decoration.  This setting requires a restart on
 ## Wayland.
 ## Type: Bool
-c.window.hide_decoration = True
+c.window.hide_decoration = False
 
 ## Format to use for the window title. The same placeholders like for
 ## `tabs.title.format` are defined.
