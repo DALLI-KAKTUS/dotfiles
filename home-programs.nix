@@ -8,7 +8,6 @@
   toConfigFile = file: (toString config_files + ("/" + file));
 in {
   home.packages = with pkgs; [
-    ntfs3g
     neofetch
     peaclock
     btop
