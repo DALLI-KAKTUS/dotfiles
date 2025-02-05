@@ -13,6 +13,7 @@
     taps = [
     ];
     casks = [
+      "altserver"
       "obs"
       "duet"
       "arduino-ide"
