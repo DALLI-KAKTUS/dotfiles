@@ -13,7 +13,6 @@
     taps = [
     ];
     casks = [
-      "macfuse"
       "altserver"
       "obs"
       "duet"
@@ -48,7 +47,6 @@
       "qutebrowser"
     ];
     brews = [
-      "ntfs-3g"
       "winetricks"
       "cava"
       "figlet"
