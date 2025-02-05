@@ -13,6 +13,8 @@
     taps = [
     ];
     casks = [
+      "macfuse"
+      "ntfs-3g"
       "altserver"
       "obs"
       "duet"
