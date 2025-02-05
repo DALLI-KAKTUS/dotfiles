@@ -14,7 +14,6 @@
     ];
     casks = [
       "macfuse"
-      "ntfs-3g"
       "altserver"
       "obs"
       "duet"
@@ -49,6 +48,7 @@
       "qutebrowser"
     ];
     brews = [
+      "ntfs-3g"
       "winetricks"
       "cava"
       "figlet"
