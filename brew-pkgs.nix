@@ -36,6 +36,7 @@
       "loop"
       "dropshelf"
       "middleclick"
+      "linearmouse"
       "vmware-fusion"
       "autodesk-fusion"
       "spaceid"

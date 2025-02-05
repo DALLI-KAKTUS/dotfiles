@@ -9,6 +9,7 @@
 in {
   home.packages = with pkgs; [
     neofetch
+    peaclock
     btop
     tree
     fd
