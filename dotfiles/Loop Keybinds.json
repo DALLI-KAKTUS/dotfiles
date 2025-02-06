@@ -1,20 +1,26 @@
 {
+  "triggerKey" : [
+    58
+  ],
   "actions" : [
     {
+      "direction" : "Maximize",
       "keybind" : [
         3
-      ],
-      "direction" : "Maximize"
+      ]
     },
     {
       "keybind" : [
         36
       ],
-      "direction" : "Center"
+      "direction" : "MacOSCenter"
     },
     {
-      "name" : "Top Cycle",
       "direction" : "Cycle",
+      "keybind" : [
+        40
+      ],
+      "name" : "Top Cycle",
       "cycle" : [
         {
           "direction" : "TopHalf",
@@ -34,16 +40,9 @@
 
           ]
         }
-      ],
-      "keybind" : [
-        40
       ]
     },
     {
-      "direction" : "Cycle",
-      "keybind" : [
-        38
-      ],
       "cycle" : [
         {
           "direction" : "BottomHalf",
@@ -52,10 +51,10 @@
           ]
         },
         {
-          "direction" : "BottomThird",
           "keybind" : [
 
-          ]
+          ],
+          "direction" : "BottomThird"
         },
         {
           "keybind" : [
@@ -64,41 +63,41 @@
           "direction" : "BottomTwoThirds"
         }
       ],
+      "keybind" : [
+        38
+      ],
+      "direction" : "Cycle",
       "name" : "Bottom Cycle"
     },
     {
-      "direction" : "Cycle",
       "name" : "Right Cycle",
       "cycle" : [
         {
-          "keybind" : [
-
-          ],
-          "direction" : "RightHalf"
-        },
-        {
-          "keybind" : [
-
-          ],
-          "direction" : "RightThird"
-        },
-        {
-          "direction" : "RightTwoThirds",
+          "direction" : "RightHalf",
           "keybind" : [
 
           ]
+        },
+        {
+          "direction" : "RightThird",
+          "keybind" : [
+
+          ]
+        },
+        {
+          "keybind" : [
+
+          ],
+          "direction" : "RightTwoThirds"
         }
       ],
+      "direction" : "Cycle",
       "keybind" : [
         37
       ]
     },
     {
       "name" : "Left Cycle",
-      "direction" : "Cycle",
-      "keybind" : [
-        4
-      ],
       "cycle" : [
         {
           "direction" : "LeftHalf",
@@ -107,10 +106,10 @@
           ]
         },
         {
+          "direction" : "LeftThird",
           "keybind" : [
 
-          ],
-          "direction" : "LeftThird"
+          ]
         },
         {
           "direction" : "LeftTwoThirds",
@@ -118,39 +117,36 @@
 
           ]
         }
+      ],
+      "direction" : "Cycle",
+      "keybind" : [
+        4
       ]
     },
     {
       "direction" : "TopLeftQuarter",
       "keybind" : [
-        40,
-        4
+        32
       ]
     },
     {
       "direction" : "TopRightQuarter",
       "keybind" : [
-        40,
-        37
-      ]
-    },
-    {
-      "direction" : "BottomRightQuarter",
-      "keybind" : [
-        38,
-        37
+        34
       ]
     },
     {
       "keybind" : [
-        38,
-        4
+        45
       ],
-      "direction" : "BottomLeftQuarter"
+      "direction" : "BottomRightQuarter"
+    },
+    {
+      "direction" : "BottomLeftQuarter",
+      "keybind" : [
+        46
+      ]
     }
   ],
-  "version" : "1.2.0",
-  "triggerKey" : [
-    63
-  ]
+  "version" : "1.2.0"
 }
