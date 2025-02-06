@@ -38,7 +38,6 @@
       # system tools
       "keyclu"
       "maccy"
-      "dropshelf"
       "middleclick"
       "linearmouse"
       "spaceid"
