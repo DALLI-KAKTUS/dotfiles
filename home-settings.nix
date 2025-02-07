@@ -5,6 +5,7 @@
   ...
 }: let
 in {
+    nixpkgs.config.allowBroken = true;
   # default font SF Pro
   xdg.enable = true;
   # aliases
