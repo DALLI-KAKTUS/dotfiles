@@ -62,6 +62,9 @@ in {
     #Fonts
     (nerdfonts.override {fonts = ["VictorMono"];})
   ];
+    programs.ghostty = {
+      enable = true;
+    };
   programs.nushell = { 
     enable = true;
     # for editing directly to config.nu 
