@@ -78,9 +78,9 @@ in {
       strip_trailing_spaces = "smart";
       url_prefixes = "http https gemini";
       url_style = "curly";
-      background_opacity = "1";
+      background_opacity = "0.95";
     };
-    font.name = "SF Pro";
+    font.name = "Victor Mono Nerd Font Mono";
     font.size = 14;
     shellIntegration.enableZshIntegration = true;
     extraConfig = ''
