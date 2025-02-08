@@ -491,7 +491,9 @@ in {
       "--cmd cd"
     ];
   };
-
+  programs.lazygit = {
+    enable = true;
+  };
   programs.zsh = {
     enable = true;
     enableCompletion = true;
