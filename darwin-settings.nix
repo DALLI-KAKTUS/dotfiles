@@ -38,7 +38,6 @@
     };
     keyboard = {
       enableKeyMapping = true;
-      remapCapsLockToEscape = true;
     };
   };
   # backwards compat; don't change

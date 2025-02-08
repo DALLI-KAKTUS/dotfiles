@@ -41,8 +41,8 @@
       "middleclick"
       "linearmouse"
       "spaceid"
-      "hammerspoon"
       "karabiner-elements"
+      "hammerspoon"
       "hiddenbar"
     ];
     brews = [
