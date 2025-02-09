@@ -11,6 +11,7 @@
   system = {
     defaults = {
       dock = {
+        orientation = "bottom";
         autohide = true;
         autohide-delay = 0.16;
         mru-spaces = false;
@@ -21,6 +22,8 @@
         mineffect = "genie";
         showhidden = true;
         scroll-to-open = true;
+        minimize-to-application = true;
+
         # hot corners
         wvous-bl-corner = 11; # launchpad
         wvous-br-corner = 14; # Quick Note
@@ -28,7 +31,7 @@
         wvous-tr-corner = 12; # Notification Center
         persistent-apps = [
         "/Applications/Safari.app"
-          #"/Users/kaktus/Applications/Home Manager Trampolines/kitty.app/" add kitty manualy
+          #"/Usersdock.minimize-to-application/kaktus/Applications/Home Manager Trampolines/kitty.app/" add kitty manualy
         "/System/Applications/System Settings.app"
         "/System/Applications/iPhone Mirroring.app"
       ];
@@ -45,7 +48,7 @@
         AppleShowAllFiles = true;
         FXDefaultSearchScope = "SCcf";
         ShowPathbar = true;
-        ShowStatusBar = true;
+        ShowStatusBar = false;
 
 
       };

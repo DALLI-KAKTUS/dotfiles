@@ -13,6 +13,7 @@
     taps = [
     ];
     casks = [
+      "keyboardcleantool"
       "altserver"
       "obs"
       "duet"
