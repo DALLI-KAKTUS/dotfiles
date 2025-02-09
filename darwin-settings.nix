@@ -14,14 +14,13 @@
         autohide = true;
         autohide-delay = 0.16;
         mru-spaces = false;
-        tilesize = 64;
+        tilesize = 32;
         largesize = 64;
         magnification = true;
         mouse-over-hilite-stack = true;
         mineffect = "genie";
-        showhidden = true;
+        showhidden = false;
         scroll-to-open = true;
-        slow-motion-allowed = true;
         # hot corners
         wvous-bl-corner = 11; # launchpad
         wvous-br-corner = 14; # Quick Note
