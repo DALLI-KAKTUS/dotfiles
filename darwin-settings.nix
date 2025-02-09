@@ -30,8 +30,9 @@
         wvous-tl-corner = 4;  # Desktop
         wvous-tr-corner = 12; # Notification Center
         persistent-apps = [
+        "/System/Applications/Launchpad.app"
         "/Applications/Safari.app"
-          #"/Usersdock.minimize-to-application/kaktus/Applications/Home Manager Trampolines/kitty.app/" add kitty manualy
+        "/Users/kaktus/Applications/Home Manager Trampolines/kitty.app"
         "/System/Applications/System Settings.app"
         "/System/Applications/iPhone Mirroring.app"
       ];
