@@ -14,10 +14,25 @@
         autohide = true;
         autohide-delay = 0.16;
         mru-spaces = false;
+        tilesize = 64;
         largesize = 64;
         magnification = true;
         mouse-over-hilite-stack = true;
-        wvous-bl-corner = 11;
+        mineffect = "genie";
+        showhidden = true;
+        scroll-to-open = true;
+        slow-motion-allowed = true;
+        # hot corners
+        wvous-bl-corner = 11; # launchpad
+        wvous-br-corner = 14; # Quick Note
+        wvous-tl-corner = 4;  # Desktop
+        wvous-tr-corner = 12; # Notification Center
+        persistent-apps = [
+        "/Applications/Safari.app"
+        "/Users/kaktus/Applications/Home Manager Trampolines/kitty.app/"
+        "/System/Applications/System Settings.app"
+        "/System/Applications/iPhone Mirroring.app"
+      ];
       };
       menuExtraClock = {
         ShowDate = 2;
@@ -29,6 +44,11 @@
       finder = {
         AppleShowAllExtensions = true;
         AppleShowAllFiles = true;
+        FXDefaultSearchScope = "SCcf";
+        ShowPathbar = true;
+        ShowStatusBar = true;
+
+
       };
       WindowManager.GloballyEnabled = false; # stage manager
       trackpad = {
