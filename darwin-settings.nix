@@ -14,12 +14,12 @@
         autohide = true;
         autohide-delay = 0.16;
         mru-spaces = false;
-        tilesize = 32;
-        largesize = 64;
+        tilesize = 50;
+        largesize = 70;
         magnification = true;
         mouse-over-hilite-stack = true;
         mineffect = "genie";
-        showhidden = false;
+        showhidden = true;
         scroll-to-open = true;
         # hot corners
         wvous-bl-corner = 11; # launchpad
@@ -28,7 +28,7 @@
         wvous-tr-corner = 12; # Notification Center
         persistent-apps = [
         "/Applications/Safari.app"
-        "/Users/kaktus/Applications/Home Manager Trampolines/kitty.app/"
+          #"/Users/kaktus/Applications/Home Manager Trampolines/kitty.app/" add kitty manualy
         "/System/Applications/System Settings.app"
         "/System/Applications/iPhone Mirroring.app"
       ];
