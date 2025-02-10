@@ -62,6 +62,7 @@ in {
     #Fonts
     (nerdfonts.override {fonts = ["VictorMono"];})
   ];
+  programs.java.enable = true;
   programs.kitty = {
     enable = true;
     settings = {
