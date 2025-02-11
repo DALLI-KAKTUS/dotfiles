@@ -8,6 +8,7 @@
   toConfigFile = file: (toString config_files + ("/" + file));
 in {
   home.packages = with pkgs; [
+    krabby
     neofetch
     asciiquarium-transparent
     peaclock
@@ -541,6 +542,8 @@ in {
       zstyle ':completion:*' menu no
       zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
       zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+      
+      krabby random
     '';
   };
   # FZF Config

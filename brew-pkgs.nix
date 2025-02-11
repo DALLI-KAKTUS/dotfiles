@@ -13,6 +13,7 @@
     taps = [
     ];
     casks = [
+      "pablopunk/brew/swift-shift"
       "keyboardcleantool"
       "altserver"
       "obs"

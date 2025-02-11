@@ -38,7 +38,7 @@
           "/System/Applications/iPhone Mirroring.app"
         ];
       };
-      NSGlobalDomain.KeyRepeat= 0;
+      NSGlobalDomain.KeyRepeat= 2;
       menuExtraClock = {
         ShowDate = 2;
         Show24Hour = false;
