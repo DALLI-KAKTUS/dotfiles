@@ -14,6 +14,7 @@
         orientation = "bottom";
         autohide = true;
         autohide-delay = 0.16;
+        autohide-time-modifier = 0.1;
         mru-spaces = false;
         tilesize = 50;
         largesize = 70;
@@ -30,13 +31,14 @@
         wvous-tl-corner = 4;  # Desktop
         wvous-tr-corner = 12; # Notification Center
         persistent-apps = [
-        "/System/Applications/Launchpad.app"
-        "/Applications/Safari.app"
-        "/Users/kaktus/Applications/Home Manager Trampolines/kitty.app"
-        "/System/Applications/System Settings.app"
-        "/System/Applications/iPhone Mirroring.app"
-      ];
+          "/System/Applications/Launchpad.app"
+          "/Applications/Safari.app"
+          "/Users/kaktus/Applications/Home Manager Trampolines/kitty.app"
+          "/System/Applications/System Settings.app"
+          "/System/Applications/iPhone Mirroring.app"
+        ];
       };
+      NSGlobalDomain.KeyRepeat= 0;
       menuExtraClock = {
         ShowDate = 2;
         Show24Hour = false;
