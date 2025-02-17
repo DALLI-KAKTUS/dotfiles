@@ -39,6 +39,7 @@
         ];
       };
       NSGlobalDomain.KeyRepeat= 2;
+      NSGlobalDomain.NSWindowShouldDragOnGesture = true;
       menuExtraClock = {
         ShowDate = 2;
         Show24Hour = false;
