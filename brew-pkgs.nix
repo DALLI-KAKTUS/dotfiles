@@ -13,6 +13,7 @@
     taps = [
     ];
     casks = [
+      "chatgpt" # delete it
       "pablopunk/brew/swift-shift"
       "keyboardcleantool"
       "altserver"

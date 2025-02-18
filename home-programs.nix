@@ -170,10 +170,10 @@ in {
      )
      '';
    };  
-   programs.carapace = {
+  programs.carapace = {
     enable = true;
     enableNushellIntegration = true;
-   };
+  };
   programs.neovim = let
     toLua = str: "lua << EOF\n${str}\nEOF\n";
     nvim_config_files = toConfigFile "nvim/lua/plugins";
@@ -310,14 +310,7 @@ in {
         plugin = diffview-nvim;
         config = toLua ''require('diffview').setup({}) '';
       }
-      {
-        # Oil
-        plugin = oil-nvim;
-        config = toLua ''
-          local oil = require("oil")
-          oil.setup()
-          vim.keymap.set("n", "-", oil.toggle_float, {}) '';
-      }
+      
       {
         # Treesitter
         plugin = nvim-treesitter.withAllGrammars;
@@ -546,18 +539,15 @@ in {
       krabby random
     '';
   };
-  # FZF Config
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
   };
-  # Eza
   programs.eza = {
     enable = true;
     icons = "always";
     enableZshIntegration = true;
   };
-  # Starship Config
   programs.starship = {
     enable = true;
     # Configuration written to ~/.config/starship.toml
@@ -568,18 +558,15 @@ in {
       };
     };
   };
-  # Git Config
   programs.git = {
     enable = true;
     userName = "DALLI-KAKTUS";
     userEmail = "berked2003@hotmail.com";
   };
-  # qutebrowser
   home.file.".qutebrowser" = {
     source = ./dotfiles/qutebrowser;
     # recursive = true;
   };
-  # YAZI File Manager
   programs.yazi = {
     enable = true;
   };
