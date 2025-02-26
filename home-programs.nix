@@ -22,6 +22,7 @@ in {
     zip
     unzip
     tldr
+    uv
     (python312.withPackages (ps:
       with ps; [
         # python paketleri
@@ -30,6 +31,7 @@ in {
         pandas
         matplotlib
         scikit-learn
+        uv
       ]))
     logisim
     logisim-evolution
