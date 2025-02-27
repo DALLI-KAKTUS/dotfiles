@@ -22,7 +22,7 @@ in {
     zip
     unzip
     tldr
-    uv
+    flutter
     (python312.withPackages (ps:
       with ps; [
         # python paketleri
