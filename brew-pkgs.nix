@@ -47,6 +47,9 @@
       "karabiner-elements"
       "hammerspoon"
       "hiddenbar"
+      "wacom-tablet"
+      "raspberry-pi-imager"
+      "vnc-viewer"
     ];
     brews = [
       "winetricks"
@@ -54,6 +57,12 @@
       "figlet"
       "cowsay"
       "mas"
+      "inetutils"
+      #maxim sdk depens
+      "libusb-compat"
+      "libftdi"
+      "hidapi"
+      "libusb"
     ];
     masApps = {
       "whatsapp" = 310633997;
