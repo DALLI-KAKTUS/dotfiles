@@ -66,6 +66,9 @@ in {
     (nerdfonts.override {fonts = ["VictorMono"];})
   ];
   programs.java.enable = true;
+  programs.tmux = { 
+    enable = true;
+  };
   programs.kitty = {
     enable = true;
     settings = {
