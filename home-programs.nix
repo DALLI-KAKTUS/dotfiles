@@ -67,7 +67,7 @@ in {
     (nerdfonts.override {fonts = ["VictorMono"];})
   ];
   programs.java.enable = true;
-  programs.tmux = { 
+  programs.tmux = {
     enable = true;
     terminal = "screen-256color";
     shortcut = "a";
@@ -80,15 +80,15 @@ in {
     ];
     extraConfig = ''
       setw -g mouse on
-     
+
       # set vi-mode
-      set-window-option -g mode-keys vi 
+      set-window-option -g mode-keys vi
 
       # keybindings
       bind-key -T copy-mode-vi v send-keys -X begin-selection
       bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
       bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
-      
+
       # Stay in same directory when split
       bind | split-window -h -c "#{pane_current_path}"
       bind - split-window -v -c "#{pane_current_path}"
@@ -192,36 +192,36 @@ in {
       color15 #a6adc8
     '';
   };
-  programs.nushell = { 
+  programs.nushell = {
     enable = true;
-    # for editing directly to config.nu 
+    # for editing directly to config.nu
     extraConfig = ''
-     let carapace_completer = {|spans|
-     carapace $spans.0 nushell $spans | from json
-     }
-     $env.config = {
-      show_banner: false,
-      completions: {
-      case_sensitive: false # case-sensitive completions
-      quick: true    # set to false to prevent auto-selecting completions
-      partial: true    # set to false to prevent partial filling of the prompt
-      algorithm: "fuzzy"    # prefix or fuzzy
-      external: {
-      # set to false to prevent nushell looking into $env.PATH to find more suggestions
-          enable: true 
-      # set to lower can improve completion performance at the cost of omitting some options
-          max_results: 100 
-          completer: $carapace_completer # check 'carapace_completer' 
-        }
+      let carapace_completer = {|spans|
+      carapace $spans.0 nushell $spans | from json
       }
-     } 
-     $env.PATH = ($env.PATH | 
-     split row (char esep) |
-     prepend /home/myuser/.apps |
-     append /usr/bin/env
-     )
-     '';
-   };  
+      $env.config = {
+       show_banner: false,
+       completions: {
+       case_sensitive: false # case-sensitive completions
+       quick: true    # set to false to prevent auto-selecting completions
+       partial: true    # set to false to prevent partial filling of the prompt
+       algorithm: "fuzzy"    # prefix or fuzzy
+       external: {
+       # set to false to prevent nushell looking into $env.PATH to find more suggestions
+           enable: true
+       # set to lower can improve completion performance at the cost of omitting some options
+           max_results: 100
+           completer: $carapace_completer # check 'carapace_completer'
+         }
+       }
+      }
+      $env.PATH = ($env.PATH |
+      split row (char esep) |
+      prepend /home/myuser/.apps |
+      append /usr/bin/env
+      )
+    '';
+  };
   programs.carapace = {
     enable = true;
     enableNushellIntegration = true;
@@ -364,7 +364,7 @@ in {
         plugin = diffview-nvim;
         config = toLua ''require('diffview').setup({}) '';
       }
-      
+
       {
         # Treesitter
         plugin = nvim-treesitter.withAllGrammars;
@@ -555,7 +555,7 @@ in {
       zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
       zstyle ':completion:*' menu select
     '';
-    
+
     plugins = [
       {
         # will source vi-mode plugin
@@ -589,7 +589,7 @@ in {
       zstyle ':completion:*' menu no
       zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
       zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
-      
+
       krabby random
     '';
   };
