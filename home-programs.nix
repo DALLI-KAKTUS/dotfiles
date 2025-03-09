@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  pkgs-unstable,
   home-manager,
   ...
 }: let
@@ -72,48 +73,102 @@ in {
     terminal = "screen-256color";
     shortcut = "a";
     keyMode = "vi";
-    plugins = with pkgs.tmuxPlugins; [
+    plugins = with pkgs-unstable.tmuxPlugins; [
       better-mouse-mode
-      vim-tmux-navigator
       yank
+      tmux-which-key
       catppuccin
     ];
     extraConfig = ''
+
+      # vim style tmux config
+
+      # use C-a, since it's on the home row and easier to hit than C-b
+      set-option -g prefix C-a
+      unbind-key C-a
+      bind-key C-a send-prefix
+      set -g base-index 1
+
+      # vi is good
+      setw -g mode-keys vi
+
+      # mouse behavior
       setw -g mouse on
-      # set zsh as default
-      set-option -g default-shell $SHELL
-      # set vi-mode
-      set-window-option -g mode-keys vi
 
-      # keybindings
-      bind-key -T copy-mode-vi v send-keys -X begin-selection
-      bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
-      bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+      set-option -g default-terminal screen-256color
 
-      # Stay in same directory when split
-      bind | split-window -h -c "#{pane_current_path}"
-      bind - split-window -v -c "#{pane_current_path}"
+      bind-key : command-prompt
+      bind-key r refresh-client
+      bind-key L clear-history
 
-      bind-key R run-shell ' \
-      tmux source-file /etc/tmux.conf > /dev/null; \
-      tmux display-message "sourced /etc/tmux.conf"'
+      bind-key space next-window
+      bind-key bspace previous-window
+      bind-key enter next-layout
 
-      # Be faster switching windows
-      bind C-n next-window
-      bind C-p previous-window
+      # use vim-like keys for splits and windows
+      bind-key v split-window -h
+      bind-key s split-window -v
+      bind-key h select-pane -L
+      bind-key j select-pane -D
+      bind-key k select-pane -U
+      bind-key l select-pane -R
 
-      # Force true colors
-      set-option -ga terminal-overrides ",*:Tc"
+      # smart pane switching with awareness of vim splits
+      bind -n C-h run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim$' && tmux send-keys C-h) || tmux select-pane -L"
+      bind -n C-j run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim$' && tmux send-keys C-j) || tmux select-pane -D"
+      bind -n C-k run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim$' && tmux send-keys C-k) || tmux select-pane -U"
+      bind -n C-l run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim$' && tmux send-keys C-l) || tmux select-pane -R"
+      bind -n 'C-\' run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim$' && tmux send-keys 'C-\\') || tmux select-pane -l"
+      bind C-l send-keys 'C-l'
 
-      set-option -g mouse on
-      set-option -g focus-events on
+      bind-key C-o rotate-window
 
-      bind -n Home send-key C-a
-      bind -n End send-key C-e
+      bind-key + select-layout main-horizontal
+      bind-key = select-layout main-vertical
 
-      #set-option -g repeat-time 100
-      set -sg escape-time 0
+      set-window-option -g other-pane-height 25
+      set-window-option -g other-pane-width 80
+      set-window-option -g display-panes-time 1500
+      set-window-option -g window-status-current-style fg=magenta
 
+      bind-key a last-pane
+      bind-key q display-panes
+      bind-key c new-window
+      bind-key t next-window
+      bind-key T previous-window
+
+      bind-key [ copy-mode
+      bind-key ] paste-buffer
+
+      # Setup 'v' to begin selection as in Vim
+      bind-key -T copy-mode-vi v send -X begin-selection
+      bind-key -T copy-mode-vi y send -X copy-pipe-and-cancel "reattach-to-user-namespace pbcopy"
+
+      # Update default binding of `Enter` to also use copy-pipe
+      unbind -T copy-mode-vi Enter
+      bind-key -T copy-mode-vi Enter send -X copy-pipe-and-cancel "reattach-to-user-namespace pbcopy"
+
+      # Status Bar
+      set-option -g status-interval 1
+      set-option -g status-style bg=black
+      set-option -g status-style fg=white
+      set -g status-left '#[fg=green]#H #[default]'
+      set -g status-right '%a%l:%M:%S %p#[default] #[fg=blue]%Y-%m-%d'
+
+      set-option -g pane-active-border-style fg=yellow
+      set-option -g pane-border-style fg=cyan
+
+      # Set window notifications
+      setw -g monitor-activity on
+      set -g visual-activity on
+
+      # Enable native Mac OS X copy/paste
+      set-option -g default-command "/bin/zsh -c 'which reattach-to-user-namespace >/dev/null && exec reattach-to-user-namespace $SHELL -l || exec $SHELL -l'"
+
+      # Allow the arrow key to be used immediately after changing windows
+      set-option -g repeat-time 0
+
+      # theme
       set -g @catppuccin_flavour 'mocha'
     '';
   };
