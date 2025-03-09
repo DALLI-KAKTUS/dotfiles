@@ -80,7 +80,8 @@ in {
     ];
     extraConfig = ''
       setw -g mouse on
-
+      # set zsh as default
+      set-option -g default-shell $SHELL
       # set vi-mode
       set-window-option -g mode-keys vi
 
