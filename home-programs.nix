@@ -76,7 +76,6 @@ in {
     plugins = with pkgs-unstable.tmuxPlugins; [
       better-mouse-mode
       yank
-      tmux-which-key
       catppuccin
     ];
     extraConfig = ''
@@ -167,7 +166,7 @@ in {
 
       # Allow the arrow key to be used immediately after changing windows
       set-option -g repeat-time 0
-
+      
       # theme
       set -g @catppuccin_flavour 'mocha'
     '';
