@@ -79,7 +79,7 @@ in {
       catppuccin
     ];
     extraConfig = ''
-
+    bind-key y display-popup -w 100% -h 70% -E 'comm -23 <(tmux list-keys | sort) <(tmux -L test -f /dev/null list-keys | sort) | cut -c-"$(tput cols)" | fzf -e -i --prompt="tmux hotkeys: " --info=inline --layout=reverse --scroll-off=5 --tiebreak=index --header "prefix=yes-prefix root=no-prefix" > /dev/null'
       # vim style tmux config
 
       # use C-a, since it's on the home row and easier to hit than C-b

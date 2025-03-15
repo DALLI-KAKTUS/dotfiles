@@ -29,6 +29,7 @@
       #"kdenlive"
       #"handbrake"
       #"orca-slicer"
+      "ultimaker-cura"
       "creality-print"
       #"blender"
       #"freecad"
