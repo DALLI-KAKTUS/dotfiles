@@ -57,7 +57,9 @@
 
       };
       WindowManager.GloballyEnabled = false; # stage manager
+
       trackpad = {
+        Dragging = true;
         Clicking = true;
         TrackpadThreeFingerDrag = true;
       };

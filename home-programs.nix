@@ -498,21 +498,21 @@ in {
         plugin = bufferline-nvim;
         config = toLua ''require('bufferline').setup({}) '';
       }
-      {
-        # cmp-cmdline
-        plugin = cmp-cmdline;
-        config = toLua ''
-          cmp.setup.cmdline(':', {
-            mapping = cmp.mapping.preset.cmdline(),
-            sources = cmp.config.sources({
-              { name = 'path' }
-            }, {
-              { name = 'cmdline' }
-            }),
-            matching = { disallow_symbol_nonprefix_matching = false }
-          })
-        '';
-      }
+      # {
+      #   # cmp-cmdline
+      #   plugin = cmp-cmdline;
+      #   config = toLua ''
+      #     cmp.setup.cmdline(':', {
+      #       mapping = cmp.mapping.preset.cmdline(),
+      #       sources = cmp.config.sources({
+      #         { name = 'path' }
+      #       }, {
+      #         { name = 'cmdline' }
+      #       }),
+      #       matching = { disallow_symbol_nonprefix_matching = false }
+      #     })
+      #   '';
+      # }
       {
         # catpuccin
         plugin = catppuccin-nvim;

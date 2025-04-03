@@ -39,6 +39,7 @@
       "cemu"
       "vmware-fusion"
       "autodesk-fusion"
+      "chirp"
       # system tools
       "keyclu"
       "maccy"
