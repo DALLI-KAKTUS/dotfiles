@@ -28,12 +28,14 @@ in {
       with ps; [
         # python paketleri
         pyserial # esp32'nin çalışması için gerekli
+        meshtastic
         scipy
         pandas
         matplotlib
         scikit-learn
         uv
       ]))
+    esptool
     logisim
     logisim-evolution
     #nodejs_22

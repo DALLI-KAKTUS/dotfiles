@@ -66,6 +66,9 @@
       "hidapi"
       "libusb"
       "platformio"
+      "cmake"
+      "ninja"
+      "dfu-util"
     ];
     masApps = {
       "whatsapp" = 310633997;
