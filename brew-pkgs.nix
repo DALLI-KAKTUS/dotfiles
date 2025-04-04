@@ -65,6 +65,7 @@
       "libftdi"
       "hidapi"
       "libusb"
+      "platformio"
     ];
     masApps = {
       "whatsapp" = 310633997;
