@@ -28,7 +28,6 @@ in {
       with ps; [
         # python paketleri
         pyserial # esp32'nin çalışması için gerekli
-        meshtastic
         scipy
         pandas
         matplotlib

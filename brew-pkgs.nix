@@ -73,7 +73,8 @@
     masApps = {
       "whatsapp" = 310633997;
       "plash" = 1494023538;
-      "pipifier" = 1160374471; 
+      "pipifier" = 1160374471;
+      "meshtastic" = 1586432531;
     };
   };
 }
