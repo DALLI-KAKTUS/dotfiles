@@ -9,6 +9,7 @@
   toConfigFile = file: (toString config_files + ("/" + file));
 in {
   home.packages = with pkgs; [
+    vscode #only for platformio i am not gay
     krabby
     neofetch
     asciiquarium-transparent
@@ -24,7 +25,7 @@ in {
     unzip
     tldr
     flutter
-    (python312.withPackages (ps:
+    (python313.withPackages (ps:
       with ps; [
         # python paketleri
         pyserial # esp32'nin çalışması için gerekli
@@ -33,6 +34,8 @@ in {
         matplotlib
         scikit-learn
         uv
+        intelhex
+        pyusb
       ]))
     esptool
     logisim
@@ -58,6 +61,7 @@ in {
     ripgrep
     ripgrep-all
     bat
+    gnuradio
     # Language Servers
     ed
     nil

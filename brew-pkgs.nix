@@ -60,6 +60,7 @@
       "cowsay"
       "mas"
       "inetutils"
+      "openjdk"
       #maxim sdk depens
       "libusb-compat"
       "libftdi"
@@ -69,6 +70,9 @@
       "cmake"
       "ninja"
       "dfu-util"
+      "pkg-config" 
+      "libusb"
+      "qdmr"
     ];
     masApps = {
       "whatsapp" = 310633997;
