@@ -12,7 +12,7 @@ in {
   home.shellAliases = {
       ".." = "cd ..";
       ":q" = "exit";
-      "re" = "nix run nix-darwin -- switch --flake ~/Documents/nix/#macOS";
+      "re" = "sudo nix run nix-darwin -- switch --flake ~/Documents/nix/#macOS";
     };
   home.file.".hammerspoon" = {
     source = ./hammerspoon;

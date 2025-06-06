@@ -14,9 +14,7 @@
     ];
     casks = [
       "chatgpt" # delete it
-      "pablopunk/brew/swift-shift"
       "keyboardcleantool"
-      "altserver"
       "obs"
       "duet"
       "arduino-ide"
@@ -24,13 +22,15 @@
       "steam"
       "processing"
       #"ultimaker-cura"
+      "bambu-studio"
+      "pronterface"
       "kicad"
       "ghdl"
       #"kdenlive"
       #"handbrake"
       #"orca-slicer"
       "ultimaker-cura"
-      "creality-print"
+      #"creality-print"
       #"blender"
       #"freecad"
       "libreoffice"
@@ -52,6 +52,9 @@
       "wacom-tablet"
       "raspberry-pi-imager"
       "vnc-viewer"
+      "minecraft"
+      "curseforge"
+      "osu"
     ];
     brews = [
       "winetricks"
