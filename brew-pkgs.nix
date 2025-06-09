@@ -7,7 +7,7 @@
     enable = true;
     onActivation = {
       autoUpdate = true;
-      #cleanup = "uninstall";
+      cleanup = "uninstall";
       upgrade = true;
     };
     taps = [
@@ -54,7 +54,6 @@
       "vnc-viewer"
       "minecraft"
       "curseforge"
-      "osu"
     ];
     brews = [
       "winetricks"
