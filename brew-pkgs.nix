@@ -31,7 +31,7 @@
       #"orca-slicer"
       "ultimaker-cura"
       #"creality-print"
-      #"blender"
+      "blender"
       #"freecad"
       "libreoffice"
       #"ferdium"
