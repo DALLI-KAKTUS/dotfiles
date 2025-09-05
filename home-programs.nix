@@ -50,7 +50,6 @@ in {
     inkscape
     obsidian
     spotify
-    discord
     zathura
     localsend
     cbonsai

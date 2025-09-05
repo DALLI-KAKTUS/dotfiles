@@ -25,6 +25,7 @@
       "bambu-studio"
       "pronterface"
       "kicad"
+      "uvtools"
       "ghdl"
       #"kdenlive"
       #"handbrake"
