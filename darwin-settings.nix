@@ -6,9 +6,10 @@
   # Unfree Paketler
   nixpkgs.config.allowUnfree = true;
   programs.zsh.enable = true;
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
 
   system = {
+    primaryUser = "kaktus";
     defaults = {
       dock = {
         orientation = "bottom";

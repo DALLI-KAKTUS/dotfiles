@@ -69,7 +69,6 @@ in {
     svls
     pyright
     #Fonts
-    (nerdfonts.override {fonts = ["VictorMono"];})
   ];
   programs.java.enable = true;
   programs.tmux = {
