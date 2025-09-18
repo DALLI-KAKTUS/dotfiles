@@ -47,7 +47,6 @@ in {
     gnuplot
     audacity
     gimp
-    inkscape
     obsidian
     spotify
     zathura

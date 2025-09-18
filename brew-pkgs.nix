@@ -13,11 +13,13 @@
     taps = [
     ];
     casks = [
+      "TheBoredTeam/boring-notch/boring-notch"
       "chatgpt" # delete it
       "keyboardcleantool"
       "obs"
       "duet"
       "arduino-ide"
+      "thonny"
       "wine-stable"
       "steam"
       "epic-games"
@@ -25,6 +27,7 @@
       "bambu-studio"
       "pronterface"
       "kicad"
+      "inkscape"
       "uvtools"
       "ghdl"
       #"kdenlive"
