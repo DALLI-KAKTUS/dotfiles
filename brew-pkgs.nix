@@ -36,7 +36,7 @@
       "ultimaker-cura"
       #"creality-print"
       "blender"
-      #"freecad"
+      "freecad"
       "libreoffice"
       #"ferdium"
       "qutebrowser"
