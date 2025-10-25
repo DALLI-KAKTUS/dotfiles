@@ -14,7 +14,7 @@
     ];
     casks = [
       "TheBoredTeam/boring-notch/boring-notch"
-      "chatgpt" # delete it
+      "nvidia-geforce-now"
       "keyboardcleantool"
       "obs"
       "duet"
