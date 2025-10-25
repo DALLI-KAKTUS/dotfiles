@@ -15,6 +15,7 @@
     casks = [
       "TheBoredTeam/boring-notch/boring-notch"
       "nvidia-geforce-now"
+      "microsoft-teams"
       "keyboardcleantool"
       "obs"
       "duet"
