@@ -647,7 +647,7 @@ in {
         };
       }
     ];
-    initExtra = ''
+    initContent = ''
       bindkey "''${key[Up]}" up-line-or-search
       zstyle ':completion:*' menu no
       zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'

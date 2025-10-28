@@ -27,7 +27,6 @@
       "processing"
       "bambu-studio"
       "pronterface"
-      "cncjs"
       "kicad"
       "inkscape"
       "uvtools"
