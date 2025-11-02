@@ -10,6 +10,7 @@
 in {
   home.packages = with pkgs; [
     vscode #only for platformio i am not gay
+    ansible
     krabby
     neofetch
     asciiquarium-transparent
@@ -393,26 +394,56 @@ in {
         config = toLua ''
           local capabilities = require('cmp_nvim_lsp').default_capabilities()
           local lspconfig = require("lspconfig")
-          lspconfig.ts_ls.setup({
-             capabilities = capabilities})
-          lspconfig.solargraph.setup({
-             capabilities = capabilities})
-          lspconfig.html.setup({
-             capabilities = capabilities})
-          lspconfig.lua_ls.setup({
-             capabilities = capabilities})
-          lspconfig.nil_ls.setup({
-             capabilities = capabilities})
-          lspconfig['vhdl_ls'].setup({
-            on_attach = on_attach,
-            capabilities = capabilities
+
+          -- ts_ls
+          vim.lsp.config('ts_ls', {
+              capabilities = capabilities
           })
-          lspconfig.svls.setup({
-            capabilities = capabilities
+          vim.lsp.enable('ts_ls')
+
+          -- solargraph
+          vim.lsp.config('solargraph', {
+              capabilities = capabilities
           })
-          lspconfig.pyright.setup({
-            capabilities = capabilities
+          vim.lsp.enable('solargraph')
+
+          -- html
+          vim.lsp.config('html', {
+              capabilities = capabilities
           })
+          vim.lsp.enable('html')
+
+          -- lua_ls
+          vim.lsp.config('lua_ls', {
+              capabilities = capabilities
+          })
+          vim.lsp.enable('lua_ls')
+
+          -- nil_ls
+          vim.lsp.config('nil_ls', {
+              capabilities = capabilities
+          })
+          vim.lsp.enable('nil_ls')
+
+          -- vhdl_ls
+          vim.lsp.config('vhdl_ls', {
+              on_attach = on_attach,
+              capabilities = capabilities
+          })
+          vim.lsp.enable('vhdl_ls')
+
+          -- svls
+          vim.lsp.config('svls', {
+              capabilities = capabilities
+          })
+          vim.lsp.enable('svls')
+
+          -- pyright
+          vim.lsp.config('pyright', {
+              capabilities = capabilities
+          })
+          vim.lsp.enable('pyright')
+
           vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
           vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
           vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
@@ -471,7 +502,7 @@ in {
         # UFO
         plugin = nvim-ufo;
         config = toLua ''
-          vim.opt.foldcolumn = '0'
+          vim.opt.foldcolumn = '1'
           vim.opt.foldlevel = 99
           vim.opt.foldlevelstart = 99
           vim.opt.foldenable = true
