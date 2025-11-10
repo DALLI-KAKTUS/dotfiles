@@ -39,28 +39,27 @@ in {
         pyusb
       ]))
     esptool
-    logisim
+    #logisim
     logisim-evolution
     #nodejs_22
     devenv
     p7zip
-    gtkwave
-    gnuplot
-    audacity
-    gimp
+    #gtkwave
+    #gnuplot
+    #audacity
+    #gimp
     obsidian
     spotify
-    zathura
-    localsend
+    #zathura
     cbonsai
     exif
     libqalculate
     qalculate-qt
-    firebird-emu
+    #firebird-emu
     ripgrep
     ripgrep-all
     bat
-    gnuradio
+    #gnuradio
     # Language Servers
     ed
     nil
