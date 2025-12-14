@@ -680,6 +680,7 @@ in {
     initContent = ''
       bindkey "''${key[Up]}" up-line-or-search
       zstyle ':completion:*' menu no
+      autoload -Uz compinit; compinit
       zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
       zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
