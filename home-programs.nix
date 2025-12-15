@@ -49,7 +49,6 @@ in {
     #audacity
     #gimp
     obsidian
-    spotify
     #zathura
     cbonsai
     exif
