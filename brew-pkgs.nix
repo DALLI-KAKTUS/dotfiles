@@ -14,7 +14,7 @@
     ];
     casks = [
       "TheBoredTeam/boring-notch/boring-notch"
-      "microsoft-teams"
+      "gerlero/openfoam/openfoam"
       "keyboardcleantool"
       "obs"
       "duet"
@@ -37,6 +37,7 @@
       #"creality-print"
       "blender"
       "freecad"
+      "openscad"
       "klayout"
       "libreoffice"
       #"ferdium"
@@ -55,7 +56,10 @@
       "curseforge"
     ];
     brews = [
+      "gnuplot"
       "winetricks"
+      "precice"
+      "costerwi/homebrew-calculix/calculix-ccx"
       "cava"
       "figlet"
       "cowsay"
@@ -74,6 +78,7 @@
       "pkg-config" 
       "libusb"
       "qdmr"
+      "mole"
     ];
     masApps = {
       "whatsapp" = 310633997;
