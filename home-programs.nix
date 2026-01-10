@@ -2,7 +2,6 @@
   lib,
   pkgs,
   pkgs-unstable,
-  home-manager,
   ...
 }: let
   config_files = ./dotfiles;
@@ -20,6 +19,7 @@ in {
     fd
     ncdu
     baobab
+    nh
     duf
     sd
     zip
