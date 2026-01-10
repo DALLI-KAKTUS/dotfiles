@@ -9,7 +9,6 @@
 in {
   home.packages = with pkgs; [
     vscode #only for platformio i am not gay
-    ansible
     krabby
     neofetch
     asciiquarium-transparent
@@ -25,7 +24,6 @@ in {
     zip
     unzip
     tldr
-    flutter
     (python313.withPackages (ps:
       with ps; [
         # python paketleri
@@ -55,7 +53,6 @@ in {
     libqalculate
     qalculate-qt
     #firebird-emu
-    ripgrep
     ripgrep-all
     bat
     #gnuradio
@@ -707,8 +704,8 @@ in {
   };
   programs.git = {
     enable = true;
-    userName = "DALLI-KAKTUS";
-    userEmail = "berked2003@hotmail.com";
+    settings.user.name = "DALLI-KAKTUS";
+    settings.user.email = "berked2003@hotmail.com";
   };
   home.file.".qutebrowser" = {
     source = ./dotfiles/qutebrowser;
