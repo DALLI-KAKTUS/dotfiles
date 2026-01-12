@@ -1,8 +1,8 @@
 {pkgs, ...}: {
-  nix.extraOptions = ''
-    experimental-features = nix-command flakes
-    extra-platforms = x86_64-darwin aarch64-darwin
-  '';
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+    extra-platforms = [ "x86_64-darwin" "aarch64-darwin" ];
+  };
   # Unfree Paketler
   nixpkgs.config.allowUnfree = true;
   programs.zsh.enable = true;

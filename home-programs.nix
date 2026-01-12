@@ -63,8 +63,15 @@ in {
     vhdl-ls
     svls
     pyright
+    # Formatters
+    stylua
+    black
+    isort
+    prettierd
+    rustfmt
     #Fonts
   ];
+  programs.gemini-cli.enable = true;
   programs.java.enable = true;
   programs.tmux = {
     enable = true;
@@ -183,7 +190,7 @@ in {
       cursor_blink_interval = -1;
       cursor_stop_blinking_after = 15;
       strip_trailing_spaces = "smart";
-      url_prefixes = "http https gemini";
+      url_prefixes = "http https";
       url_style = "curly";
       background_opacity = "1";
     };
@@ -653,24 +660,14 @@ in {
         file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
       }
       {
-        # will source zsh-autosuggestions.plugin.zsh
         name = "zsh-autosuggestions";
-        src = pkgs.fetchFromGitHub {
-          owner = "zsh-users";
-          repo = "zsh-autosuggestions";
-          rev = "v0.4.0";
-          sha256 = "0z6i9wjjklb4lvr7zjhbphibsyx51psv50gm07mbb0kj9058j6kc";
-        };
+        src = pkgs.zsh-autosuggestions;
+        file = "share/zsh-autosuggestions/zsh-autosuggestions.zsh";
       }
       {
-        # will source zsh-autosuggestions.plugin.zsh
         name = "fzf-tab";
-        src = pkgs.fetchFromGitHub {
-          owner = "Aloxaf";
-          repo = "fzf-tab";
-          rev = "v1.1.2";
-          sha256 = "sha256-Qv8zAiMtrr67CbLRrFjGaPzFZcOiMVEFLg1Z+N6VMhg=";
-        };
+        src = pkgs.zsh-fzf-tab;
+        file = "share/fzf-tab/fzf-tab.plugin.zsh";
       }
     ];
     initContent = ''
