@@ -34,7 +34,7 @@
       #"kdenlive"
       #"orca-slicer"
       #"ultimaker-cura"
-      #"creality-print"
+      "creality-print"
       "blender"
       "freecad"
       "openscad"

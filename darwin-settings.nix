@@ -34,7 +34,7 @@
         persistent-apps = [
           "/System/Applications/Apps.app"
           "/Applications/Safari.app"
-          "/nix/store/wjsgcjnd0k3l9b4m3v4cpmlck7jmzcqy-kitty-0.42.1/Applications/kitty.app"
+          "/nix/store/71knarmz6b6344dvqd0m39bbvnviqrix-kitty-0.44.0/Applications/kitty.app"
           "/System/Applications/System Settings.app"
           "/System/Applications/iPhone Mirroring.app"
         ];
