@@ -20,6 +20,7 @@
       "duet"
       "arduino-ide"
       "thonny"
+      "macfuse"
       "wine-stable"
       "steam"
       "mythic"

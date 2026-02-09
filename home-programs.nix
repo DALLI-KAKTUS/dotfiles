@@ -22,6 +22,7 @@ in {
     duf
     sd
     zip
+    sshfs-fuse
     unzip
     tldr
     (python313.withPackages (ps:
