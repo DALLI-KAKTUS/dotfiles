@@ -23,7 +23,6 @@
       "macfuse"
       "wine-stable"
       "steam"
-      "mythic"
       "epic-games"
       "processing"
       "bambu-studio"
@@ -39,12 +38,11 @@
       "blender"
       "freecad"
       "openscad"
-      "klayout"
+      #"klayout"
       "libreoffice"
-      #"ferdium"
       "qutebrowser"
       #"vmware-fusion"
-      "autodesk-fusion"
+      #"autodesk-fusion"
       "chirp"
       # system tools
       "maccy"
@@ -53,20 +51,18 @@
       "wacom-tablet"
       #"raspberry-pi-imager"
       #"vnc-viewer"
-      "minecraft"
-      "curseforge"
     ];
     brews = [
       "gnuplot"
       "winetricks"
-      "precice"
-      "costerwi/homebrew-calculix/calculix-ccx"
       "cava"
       "figlet"
       "cowsay"
       "mas"
       "inetutils"
       "openjdk"
+      "qdmr"
+      "mole"
       #maxim sdk depens
       "libusb-compat"
       "libftdi"
@@ -78,8 +74,6 @@
       "dfu-util"
       "pkg-config" 
       "libusb"
-      "qdmr"
-      "mole"
     ];
     masApps = {
       "whatsapp" = 310633997;

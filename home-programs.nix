@@ -12,7 +12,6 @@ in {
     krabby
     neofetch
     asciiquarium-transparent
-    peaclock
     btop
     tree
     fd
