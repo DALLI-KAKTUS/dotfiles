@@ -17,7 +17,6 @@
       "gerlero/openfoam/openfoam"
       "keyboardcleantool"
       "obs"
-      "duet"
       "arduino-ide"
       "thonny"
       "macfuse"
