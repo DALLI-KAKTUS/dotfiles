@@ -59,7 +59,6 @@ in {
     # Language Servers
     ed
     nil
-    alejandra
     vhdl-ls
     svls
     pyright
@@ -69,9 +68,9 @@ in {
     isort
     prettierd
     rustfmt
+    alejandra
     #Fonts
   ];
-  programs.gemini-cli.enable = true;
   programs.java.enable = true;
   programs.tmux = {
     enable = true;
