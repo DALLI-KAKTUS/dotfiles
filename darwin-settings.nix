@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
-    extra-platforms = [ "x86_64-darwin" "aarch64-darwin" ];
+    experimental-features = ["nix-command" "flakes"];
+    extra-platforms = ["x86_64-darwin" "aarch64-darwin"];
   };
   # Unfree Paketler
   nixpkgs.config.allowUnfree = true;
@@ -29,7 +29,7 @@
         # hot corners
         wvous-bl-corner = 11; # launchpad
         wvous-br-corner = 14; # Quick Note
-        wvous-tl-corner = 4;  # Desktop
+        wvous-tl-corner = 4; # Desktop
         wvous-tr-corner = 12; # Notification Center
         persistent-apps = [
           "/System/Applications/Apps.app"
@@ -39,7 +39,7 @@
           "/System/Applications/iPhone Mirroring.app"
         ];
       };
-      NSGlobalDomain.KeyRepeat= 2;
+      NSGlobalDomain.KeyRepeat = 2;
       NSGlobalDomain.NSWindowShouldDragOnGesture = true;
       menuExtraClock = {
         ShowDate = 2;
@@ -54,8 +54,6 @@
         FXDefaultSearchScope = "SCcf";
         ShowPathbar = true;
         ShowStatusBar = false;
-
-
       };
       WindowManager.GloballyEnabled = false; # stage manager
 

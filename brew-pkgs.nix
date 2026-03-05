@@ -71,7 +71,7 @@
       "cmake"
       "ninja"
       "dfu-util"
-      "pkg-config" 
+      "pkg-config"
       "libusb"
     ];
     masApps = {
