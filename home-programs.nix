@@ -24,6 +24,7 @@ in {
     sshfs-fuse
     unzip
     tldr
+    dos2unix
     (python313.withPackages (ps:
       with ps; [
         # python paketleri
@@ -620,7 +621,7 @@ in {
       set mouse=a
     '';
 
-    initLua = ''
+    extraLuaConfig = ''
 
     '';
   };

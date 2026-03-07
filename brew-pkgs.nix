@@ -48,6 +48,7 @@
       "karabiner-elements"
       "hammerspoon"
       "wacom-tablet"
+      "gcc-arm-embedded"
       #"raspberry-pi-imager"
       #"vnc-viewer"
     ];
@@ -68,6 +69,7 @@
       "hidapi"
       "libusb"
       "platformio"
+      "bear"
       "cmake"
       "ninja"
       "dfu-util"
