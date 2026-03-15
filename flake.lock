@@ -1,5 +1,6 @@
 {
   "nodes": {
+<<<<<<< HEAD
     "cl-nix-lite": {
       "inputs": {
         "flake-parts": "flake-parts",
@@ -55,12 +56,27 @@
       "original": {
         "owner": "hraban",
         "ref": "fixed-output",
+=======
+    "flake-compat": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1767039857,
+        "narHash": "sha256-vNpUSpF5Nuw8xvDLj2KCwwksIbjua2LZCqhV1LNRDns=",
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "rev": "5edf11c44bc78a0d334f6334cdaf7d60d732daab",
+        "type": "github"
+      },
+      "original": {
+        "owner": "edolstra",
+>>>>>>> 4d4cd6e (basladik)
         "repo": "flake-compat",
         "type": "github"
       }
     },
     "flake-parts": {
       "inputs": {
+<<<<<<< HEAD
         "nixpkgs-lib": "nixpkgs-lib"
       },
       "locked": {
@@ -69,6 +85,20 @@
         "owner": "hercules-ci",
         "repo": "flake-parts",
         "rev": "a34fae9c08a15ad73f295041fec82323541400a9",
+=======
+        "nixpkgs-lib": [
+          "system-manager",
+          "userborn",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1768135262,
+        "narHash": "sha256-PVvu7OqHBGWN16zSi6tEmPwwHQ4rLPU9Plvs8/1TUBY=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "80daad04eddbbf5a4d883996a73f3f542fa437ac",
+>>>>>>> 4d4cd6e (basladik)
         "type": "github"
       },
       "original": {
@@ -77,6 +107,7 @@
         "type": "github"
       }
     },
+<<<<<<< HEAD
     "flake-utils": {
       "inputs": {
         "systems": [
@@ -95,6 +126,29 @@
       "original": {
         "id": "flake-utils",
         "type": "indirect"
+=======
+    "gitignore": {
+      "inputs": {
+        "nixpkgs": [
+          "system-manager",
+          "userborn",
+          "pre-commit-hooks-nix",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1709087332,
+        "narHash": "sha256-HG2cCnktfHsKV0s4XW83gU3F57gaTljL9KNSuG6bnQs=",
+        "owner": "hercules-ci",
+        "repo": "gitignore.nix",
+        "rev": "637db329424fd7e46cf4185293b9cc8c88c95394",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "gitignore.nix",
+        "type": "github"
+>>>>>>> 4d4cd6e (basladik)
       }
     },
     "home-manager": {
@@ -104,20 +158,32 @@
         ]
       },
       "locked": {
+<<<<<<< HEAD
         "lastModified": 1767780135,
         "narHash": "sha256-5SbmsLMgxzPd9YMbFR4IHfOXv6bjWs+dfl6IbSq3r7s=",
         "owner": "nix-community",
         "repo": "home-manager",
         "rev": "c08430923ed417abc653884328a39e98496cfd0f",
+=======
+        "lastModified": 1770654520,
+        "narHash": "sha256-mg5WZMIPGsFu9MxSrUcuJUPMbfMsF77el5yb/7rc10k=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "6c4fdbe1ad198fac36c320fd45c5957324a80b8e",
+>>>>>>> 4d4cd6e (basladik)
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
+<<<<<<< HEAD
         "ref": "release-25.11",
+=======
+>>>>>>> 4d4cd6e (basladik)
         "repo": "home-manager",
         "type": "github"
       }
     },
+<<<<<<< HEAD
     "mac-app-util": {
       "inputs": {
         "cl-nix-lite": "cl-nix-lite",
@@ -148,10 +214,20 @@
         "owner": "nixos",
         "repo": "nixpkgs",
         "rev": "f560ccec6b1116b22e6ed15f4c510997d99d5852",
+=======
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1770562336,
+        "narHash": "sha256-ub1gpAONMFsT/GU2hV6ZWJjur8rJ6kKxdm9IlCT0j84=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "d6c71932130818840fc8fe9509cf50be8c64634f",
+>>>>>>> 4d4cd6e (basladik)
         "type": "github"
       },
       "original": {
         "owner": "nixos",
+<<<<<<< HEAD
         "ref": "nixos-25.11",
         "repo": "nixpkgs",
         "type": "github"
@@ -199,10 +275,14 @@
       "original": {
         "owner": "nixos",
         "ref": "nixpkgs-unstable",
+=======
+        "ref": "nixos-unstable",
+>>>>>>> 4d4cd6e (basladik)
         "repo": "nixpkgs",
         "type": "github"
       }
     },
+<<<<<<< HEAD
     "nixpkgs_3": {
       "locked": {
         "lastModified": 1732617236,
@@ -248,16 +328,70 @@
         "owner": "nixos",
         "ref": "nixos-25.11",
         "repo": "nixpkgs",
+=======
+    "pre-commit-hooks-nix": {
+      "inputs": {
+        "flake-compat": [
+          "system-manager",
+          "userborn",
+          "flake-compat"
+        ],
+        "gitignore": "gitignore",
+        "nixpkgs": [
+          "system-manager",
+          "userborn",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1769069492,
+        "narHash": "sha256-Efs3VUPelRduf3PpfPP2ovEB4CXT7vHf8W+xc49RL/U=",
+        "owner": "cachix",
+        "repo": "pre-commit-hooks.nix",
+        "rev": "a1ef738813b15cf8ec759bdff5761b027e3e1d23",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cachix",
+        "repo": "pre-commit-hooks.nix",
+>>>>>>> 4d4cd6e (basladik)
         "type": "github"
       }
     },
     "root": {
       "inputs": {
+<<<<<<< HEAD
         "darwin": "darwin",
         "home-manager": "home-manager",
         "mac-app-util": "mac-app-util",
         "nixpkgs": "nixpkgs_5",
         "nixpkgs-unstable": "nixpkgs-unstable"
+=======
+        "home-manager": "home-manager",
+        "nixpkgs": "nixpkgs",
+        "system-manager": "system-manager"
+      }
+    },
+    "system-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "userborn": "userborn"
+      },
+      "locked": {
+        "lastModified": 1770630329,
+        "narHash": "sha256-Q0/JNws9SxY9wE/mCQ6WTA85MIgrJ+M0HDcJVUlk9Ds=",
+        "owner": "numtide",
+        "repo": "system-manager",
+        "rev": "442db31401bdbdadc59356232153448e05bce1db",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "system-manager",
+        "type": "github"
+>>>>>>> 4d4cd6e (basladik)
       }
     },
     "systems": {
@@ -275,6 +409,7 @@
         "type": "github"
       }
     },
+<<<<<<< HEAD
     "systems_2": {
       "locked": {
         "lastModified": 1689347925,
@@ -323,6 +458,31 @@
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
+=======
+    "userborn": {
+      "inputs": {
+        "flake-compat": "flake-compat",
+        "flake-parts": "flake-parts",
+        "nixpkgs": [
+          "system-manager",
+          "nixpkgs"
+        ],
+        "pre-commit-hooks-nix": "pre-commit-hooks-nix",
+        "systems": "systems"
+      },
+      "locked": {
+        "lastModified": 1770377964,
+        "narHash": "sha256-q2pnlX2IW0kg80GLFnwWd/GigIpkuZnyKPLhrgJql3E=",
+        "owner": "jfroche",
+        "repo": "userborn",
+        "rev": "55c2cd7952c207a62736a5bbd9499ea73da18d24",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jfroche",
+        "ref": "system-manager",
+        "repo": "userborn",
+>>>>>>> 4d4cd6e (basladik)
         "type": "github"
       }
     }
