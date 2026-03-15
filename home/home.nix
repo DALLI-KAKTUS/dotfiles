@@ -13,6 +13,7 @@ in {
     micro
     htop
     krabby
+    ncdu
   ];
   programs.kitty = {
   enable = true;

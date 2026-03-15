@@ -11,6 +11,7 @@
       pkgs.vim
       pkgs.shadow
       pkgs.kitty
+      pkgs.ncdu
     ];
 
     # Zsh'i guvenli kabuk listesine ekle
