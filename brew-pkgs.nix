@@ -14,12 +14,14 @@
     ];
     casks = [
       "TheBoredTeam/boring-notch/boring-notch"
+      "loop"
       "gerlero/openfoam/openfoam"
       "keyboardcleantool"
       "obs"
       "arduino-ide"
       "thonny"
       "macfuse"
+      "pacifist"
       "wine-stable"
       "steam"
       "epic-games"
