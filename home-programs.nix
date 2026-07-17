@@ -10,13 +10,13 @@ in {
   home.packages = with pkgs; [
     vscode #only for platformio i am not gay
     krabby
-    neofetch
+    fastfetch
     asciiquarium-transparent
     btop
     tree
     fd
     ncdu
-    baobab
+    #baobab
     nh
     duf
     sd
@@ -298,9 +298,23 @@ in {
 
     plugins = with pkgs.vimPlugins; [
       {
+        # Treesitter
+        plugin = nvim-treesitter.withAllGrammars;
+        type = "lua";
+        config = ''
+          require('nvim-treesitter').setup({
+             highlight = { enable = true },
+             indent = { enable = true },
+	     auto_install = false,
+	     sync_install = false
+          })
+        '';
+      }
+      {
         # ALE
         plugin = ale;
-        config = toLua "
+        type = "lua";
+        config = "
                local g = vim.g
                g.ale_ruby_rubocop_auto_correct_all = 1
                g.ale_linters = {
@@ -313,12 +327,14 @@ in {
       {
         # Alpha
         plugin = alpha-nvim;
-        config = toLua "require'alpha'.setup(require'alpha.themes.theta'.config)";
+        type = "lua";
+        config = "require'alpha'.setup(require'alpha.themes.theta'.config)";
       }
       {
         # Oil
         plugin = oil-nvim;
-        config = toLua ''
+        type = "lua";
+        config = ''
           local oil = require("oil")
           oil.setup()
           vim.keymap.set("n", "-", oil.toggle_float, {}) '';
@@ -326,7 +342,8 @@ in {
       {
         #Flash
         plugin = flash-nvim;
-        config = toLua ''
+        type = "lua";
+        config = ''
           vim.keymap.set({'n', 'x', 'o'}, 's', function() require("flash").jump() end, { desc = 'Flash' })
           vim.keymap.set({'n', 'x', 'o'}, 'S', function() require("flash").treesitter() end, { desc = 'Flash Treesitter'})
           vim.keymap.set('o', 'r', function() require("flash").remote() end, { desc = 'Remote Flash' })
@@ -337,7 +354,8 @@ in {
       {
         # Git Signs
         plugin = gitsigns-nvim;
-        config = toLua ''
+        type = "lua";
+        config = ''
           require("gitsigns").setup()
           vim.keymap.set("n", "<leader>gp", ":Gitsigns preview_hunk<CR>", {})
           vim.keymap.set("n", "<leader>gt", ":Gitsigns toggle_current_line_blame<CR>", {})
@@ -346,14 +364,15 @@ in {
       {
         # vim-surround
         plugin = vim-surround;
-        config =
-          toLua ''
+        type = "lua";
+        config = ''
           '';
       }
       {
         #İndent Blankline
         plugin = indent-blankline-nvim;
-        config = toLua ''
+        type = "lua";
+        config = ''
           local highlight = {
              "RainbowRed",
              "RainbowYellow",
@@ -383,17 +402,20 @@ in {
       {
         # Multiple Cursor
         plugin = vim-visual-multi;
-        config = toLua ''vim.g.VM_leader = '<leader>m' '';
+        type = "lua";
+        config = ''vim.g.VM_leader = '<leader>m' '';
       }
       {
         # cmp-nvim-lsp
         plugin = cmp-nvim-lsp;
-        config = toLua ''require('cmp').setup {sources = {{ name = 'nvim_lsp' }}} '';
+        type = "lua";
+        config = ''require('cmp').setup {sources = {{ name = 'nvim_lsp' }}} '';
       }
       {
         # LSP config
         plugin = nvim-lspconfig;
-        config = toLua ''
+        type = "lua";
+        config = ''
           local capabilities = require('cmp_nvim_lsp').default_capabilities()
           local lspconfig = require("lspconfig")
 
@@ -455,33 +477,22 @@ in {
       {
         # Nvim notify
         plugin = nvim-notify;
-        config = toLua '''';
+        type = "lua";
+        config = '''';
       }
       {
         # Diffview
         plugin = diffview-nvim;
-        config = toLua ''require('diffview').setup({}) '';
+        type = "lua";
+        config = ''require('diffview').setup({}) '';
       }
 
-      {
-        # Treesitter
-        plugin = nvim-treesitter.withAllGrammars;
-        config = toLua ''
-          local parser_install_dir = vim.fn.stdpath("cache") .. "/treesitters"
-          vim.fn.mkdir(parser_install_dir, "p")
-          vim.opt.runtimepath:append(parser_install_dir)
-          require('nvim-treesitter.configs').setup({
-             parser_install_dir = parser_install_dir,
-             auto_install = true,
-             highlight = { enable = true },
-             indent = { enable = true },
-          })
-        '';
-      }
+
       {
         # Which key
         plugin = which-key-nvim;
-        config = toLua ''
+        type = "lua";
+        config = ''
           vim.o.timeout = true
           vim.o.timeoutlen = 10
           require("which-key").setup({})
@@ -491,7 +502,8 @@ in {
       {
         # ToggleTerm
         plugin = toggleterm-nvim;
-        config = toLua ''
+        type = "lua";
+        config = ''
           require("toggleterm").setup()
           vim.keymap.set("n", "<leader>t", '<cmd>ToggleTerm <CR>', { })
           function _G.set_terminal_keymaps()
@@ -503,7 +515,8 @@ in {
       {
         # UFO
         plugin = nvim-ufo;
-        config = toLua ''
+        type = "lua";
+        config = ''
           vim.opt.foldcolumn = '1'
           vim.opt.foldlevel = 99
           vim.opt.foldlevelstart = 99
@@ -520,23 +533,27 @@ in {
       {
         # comment
         plugin = comment-nvim;
-        config = toLua ''require('Comment').setup()'';
+        type = "lua";
+        config = ''require('Comment').setup()'';
       }
 
       {
         # Undotree
         plugin = undotree;
-        config = toLua ''vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)'';
+        type = "lua";
+        config = ''vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)'';
       }
       {
         # Bufferline
         plugin = bufferline-nvim;
-        config = toLua ''require('bufferline').setup({}) '';
+        type = "lua";
+        config = ''require('bufferline').setup({}) '';
       }
       # {
       #   # cmp-cmdline
       #   plugin = cmp-cmdline;
-      #   config = toLua ''
+      #    type = "viml";
+      #   config = ''
       #     cmp.setup.cmdline(':', {
       #       mapping = cmp.mapping.preset.cmdline(),
       #       sources = cmp.config.sources({
@@ -551,12 +568,14 @@ in {
       {
         # catpuccin
         plugin = catppuccin-nvim;
-        config = toLua ''vim.cmd.colorscheme "catppuccin-mocha"'';
+        type = "lua";
+        config = ''vim.cmd.colorscheme "catppuccin-mocha"'';
       }
       {
         # conform
         plugin = conform-nvim;
-        config = toLua ''
+        type = "lua";
+        config = ''
           require("conform").setup({
             formatters_by_ft = {
               lua = { "stylua" },
@@ -574,7 +593,8 @@ in {
       {
         # block
         plugin = block-nvim;
-        config = toLua ''require("block").setup({})'';
+        type = "lua";
+        config = ''require("block").setup({})'';
       }
 
       # ToLuaFile
@@ -582,7 +602,22 @@ in {
       telescope-ui-select-nvim
       {
         plugin = telescope-nvim;
-        config = toLuaFile "telescope.lua";
+        type = "lua";
+        config = ''require("telescope").setup({
+  extensions = {
+    ["ui-select"] = {
+      require("telescope.themes").get_dropdown({}),
+    },
+  },
+})
+local builtin = require("telescope.builtin")
+vim.keymap.set("n", "<C-p>", builtin.find_files, {})
+vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
+vim.keymap.set("n", "<leader><leader>", builtin.builtin, {})
+
+require("telescope").load_extension("ui-select")
+
+        '';
       }
       {
         plugin = neo-tree-nvim;
@@ -621,7 +656,7 @@ in {
       set mouse=a
     '';
 
-    extraLuaConfig = ''
+    initLua = ''
 
     '';
   };

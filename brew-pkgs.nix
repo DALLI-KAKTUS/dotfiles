@@ -7,15 +7,15 @@
     enable = true;
     onActivation = {
       autoUpdate = true;
-      cleanup = "uninstall";
+      # cleanup = "uninstall";
       upgrade = true;
     };
     taps = [
     ];
     casks = [
-      "TheBoredTeam/boring-notch/boring-notch"
+     # "TheBoredTeam/boring-notch/boring-notch"
       "loop"
-      "gerlero/openfoam/openfoam"
+     # "gerlero/openfoam/openfoam"
       "keyboardcleantool"
       "obs"
       "arduino-ide"
@@ -51,8 +51,8 @@
       "hammerspoon"
       "wacom-tablet"
       "gcc-arm-embedded"
-      #"raspberry-pi-imager"
-      #"vnc-viewer"
+      "raspberry-pi-imager"
+      "tigervnc-viewer"
     ];
     brews = [
       "gnuplot"
