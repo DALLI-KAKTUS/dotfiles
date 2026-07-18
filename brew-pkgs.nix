@@ -77,6 +77,7 @@
       "dfu-util"
       "pkg-config"
       "libusb"
+      "wireguard-tools"
     ];
     masApps = {
       "whatsapp" = 310633997;
