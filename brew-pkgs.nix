@@ -42,6 +42,7 @@
       #"klayout"
       "libreoffice"
       "qutebrowser"
+      "chatgpt"
       #"vmware-fusion"
       #"autodesk-fusion"
       "chirp"
