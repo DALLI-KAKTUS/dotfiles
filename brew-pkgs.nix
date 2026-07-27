@@ -66,6 +66,7 @@
       "openjdk"
       "qdmr"
       "mole"
+      "age"
       #maxim sdk depens
       "libusb-compat"
       "libftdi"
