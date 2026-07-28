@@ -25,6 +25,7 @@ in {
     unzip
     tldr
     dos2unix
+    wget
     (python313.withPackages (ps:
       with ps; [
         # python paketleri
