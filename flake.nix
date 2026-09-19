@@ -12,6 +12,7 @@
     darwin.inputs.nixpkgs.follows = "nixpkgs";
     # For spotlight search
     mac-app-util.url = "github:hraban/mac-app-util";
+    mac-app-util.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
