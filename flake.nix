@@ -8,11 +8,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # Controls system level software and settings including fonts
-    darwin.url = "github:lnl7/nix-darwin/nix-darwin-26.05";
-    darwin.inputs.nixpkgs.follows = "nixpkgs";
-    # For spotlight search
-    mac-app-util.url = "github:hraban/mac-app-util";
-    mac-app-util.inputs.nixpkgs.follows = "nixpkgs";
+    darwin = {
+      url = "github:nix-darwin/nix-darwin/nix-darwin-26.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };    # For spotlight search
   };
 
   outputs = {
@@ -21,7 +20,6 @@
     nixpkgs-unstable,
     home-manager,
     darwin,
-    mac-app-util,
     ...
   } @ inputs: let
     lib = darwin.lib;
@@ -37,7 +35,6 @@
       modules = [
         ./brew-pkgs.nix
         ./darwin-settings.nix
-        mac-app-util.darwinModules.default
         inputs.home-manager.darwinModules.home-manager
         {
           users.users.kaktus.home = "/Users/kaktus";
@@ -51,7 +48,6 @@
             users.kaktus.imports = [
               ./home-settings.nix
               ./home-programs.nix
-              mac-app-util.homeManagerModules.default
               {home.stateVersion = "24.11";}
             ];
           };

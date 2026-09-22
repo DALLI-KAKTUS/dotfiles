@@ -55,7 +55,15 @@
         ShowPathbar = true;
         ShowStatusBar = false;
       };
-      WindowManager.GloballyEnabled = false; # stage manager
+      controlcenter = {
+        BatteryShowPercentage = true;
+
+      };
+      WindowManager = {
+        GloballyEnabled = true; # stage manager
+        StageManagerHideWidgets = false;
+        EnableTiledWindowMargins = true;
+      };
 
       trackpad = {
         Dragging = true;
