@@ -41,6 +41,8 @@
           home-manager = {
             useUserPackages = false;
             useGlobalPkgs = true;
+            # existing unmanaged files (e.g. btop.conf) get moved aside instead of failing
+            backupFileExtension = "hm-backup";
             extraSpecialArgs = {
               inherit pkgs-unstable;
             };

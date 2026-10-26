@@ -6,6 +6,7 @@
                 "rules": [
                     {
                         "description": "Change Caps to HYPR. (Post ESC if pressed alone)",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
@@ -25,6 +26,17 @@
                     }
                 ]
             },
+            "devices": [
+                {
+                    "identifiers": { "is_keyboard": true },
+                    "simple_modifications": [
+                        {
+                            "from": { "key_code": "grave_accent_and_tilde" },
+                            "to": [{ "key_code": "non_us_backslash" }]
+                        }
+                    ]
+                }
+            ],
             "name": "Default profile",
             "selected": true,
             "virtual_hid_keyboard": { "keyboard_type_v2": "iso" }

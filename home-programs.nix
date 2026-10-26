@@ -21,6 +21,7 @@ in {
     duf
     sd
     zip
+    tectonic
     sshfs-fuse
     unzip
     tldr
@@ -747,7 +748,14 @@ require("telescope").load_extension("ui-select")
   programs.yazi = {
     enable = true;
   };
-  programs.btop.enable = true;
+  programs.btop = {
+    enable = true;
+    settings = {
+      vim_keys = true;
+      proc_sorting = "memory";
+      update_ms = 2000;
+    };
+  };
   home.file = {
   };
 

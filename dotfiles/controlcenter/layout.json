@@ -1,0 +1,397 @@
+[
+  {
+    "displayablesData": "YnBsaXN0MDDTAQIDBFBRW2luc3RhbmNlSWRzXmNocm9ub0NvbnRyb2xzV21vZHVsZXOvECUFCAoMDhASFBYYGhweICIkJigqLC4wMjQ2ODo8PkBCREZISkxO0QYHWHJhd1ZhbHVlXxAkOTVCMzlDNzctRkMzOC00REIwLTkzNzAtMTMzMzZFRjA4RDZD0QYJXxAkNjg4RkU0NTQtMTIzOC00RTVGLTg2RDMtQTM3QzI1OTg0QTIz0QYLXxAkOEIyOEYxQkItRDQ5MC00QjdGLUEwQTktMEZENzM1NkZEQTk40QYNXxAkOURENzA0RUQtRDNCQi00NDFDLTg0N0ItREI2Q0Y0QTI1NDdG0QYPXxAkNjA0NUVFOUYtOUEzNS00MDlFLUFCQjMtQjAzQzIxMzg3RkY00QYRXxAkQUVGOUExRUYtNThGNS00RUFELUE2MTYtMjQzRTI2RDg3RDFF0QYTXxAkQTdFRkQxMEItRTlCOC00MjVBLUFDNUItM0IzNTJBRjRDNzg20QYVXxAkOUQ1Q0ZGOEItNDJBRC00OUEwLUFBNEEtNjYwMEQ2NTQ5NkU30QYXXxAkRjUzRkRERjctREQ5RC00RUJELTlEMTMtODY3MTM5QjMzRjVG0QYZXxAkRTJBNEJEQUYtQjgzOS00MTZCLTk4NEItREEzMEMzMjlBRDlF0QYbXxAkNUNCNDA0MDgtMDE2NS00RTY5LUE4OTYtMjY5QzlCRThFQTYy0QYdXxAkRTc3MUNGMkYtQjYzOC00QTg4LUJBQ0ItQ0REMDBCQkYxNjY30QYfXxAkRUU3ODZCMDEtNDIwMy00NkU5LTkzOUYtNjYzQjQ4MDk2Rjg20QYhXxAkRDZBNDM5Q0MtNzlERi00RjAzLUEzOTgtNDFEN0NCMzlDNjRB0QYjXxAkOUVFOUE4NUMtMTdCOC00MTVGLTg1RTctREVDNjQxMUQ0MkRD0QYlXxAkQTUyNzRCQzAtNkVGQi00M0NDLUEzMjQtNUQ5NzBCNTVDOUQ50QYnXxAkMjhGM0RBRTAtNzkwRi00RTE4LUI2QUMtNTcyQjFFNENCOEE30QYpXxAkMzc5M0E3NEQtRjVFOS00MDJDLTk0QTktQjc4NUU1MkJFMUIz0QYrXxAkODUyOEJGQTgtMzREQS00RTNCLThEMjctRThGOTE1QjlBRkUy0QYtXxAkNzY2RjYzQTQtMzNGQS00QTA0LUI1RjAtNkVDOUVEOUE3Mjc30QYvXxAkODNFRjI3OUEtRDYwMS00MkIwLUEwMkQtQzdDNzY1QUIzMjJB0QYxXxAkRUYwOTAyMEEtRDA2NC00OEQ4LTg5NDYtNTgxMkM2MTY5RjM30QYzXxAkNzhEMEQ5Q0ItREQ2MC00RTJBLTlDMjMtMEExQzRDMUVENjAz0QY1XxAkNzJBNzEyRDctRjkzQy00RDZFLUE4MjMtMUYxMjhDMUFFNEJE0QY3XxAkMkI1MkUyM0UtOUZBRC00QTc4LTlGOTktMjA2RDg5MTAzMUUz0QY5XxAkRjQzNEI3NzMtRjQwNC00QkE3LTlDMTAtQTZCNjFDNUEwNjJD0QY7XxAkODdDN0EzREQtRDE2OS00QzVCLUJBQjktNTVFMzk0NkJFRjY50QY9XxAkNTVGNTdDRUYtNTNGMS00QTg5LUI4RTktRUQyQjdENjM5MURF0QY/XxAkOTdFM0Y3NDYtNjU2OC00RDE5LTgyMzUtNjk3NjRBRDFFM0Y00QZBXxAkNDA2QzczMjAtNTU4Ni00RkU1LTg2OEItNTc2OTE4NUYwRUM30QZDXxAkRDBFRkIzRjgtRUZGQi00OTY0LUJEMDItMjBBRkY5MTY4QTJG0QZFXxAkMjUyQUY1MzAtRDkwNS00OUZBLTg4NUUtRkNDQjc1MzcyNDMw0QZHXxAkRTgyRjVGOTQtQkZGNi00NkU4LUJDQkItNDQ1NkUxREM5NDMy0QZJXxAkQzZFMUFGNUYtN0FFNi00QkM2LUI0ODUtODBGRjBCRUI5RUU50QZLXxAkQTc1MkM1QTYtREFGRC00OTA3LThCREMtMjc1RDhBM0Q5Njky0QZNXxAkRUVCRDhFMUUtOTc0MC00NjNFLTkwODQtRTk5M0M3REI0NkE10QZPXxAkNjE4RUI4NjYtRUFEQy00OTQzLUIyNTgtRkY0OUNBMERBQjQzTxDoYnBsaXN0MDCkAQQGCNECA1hyYXdWYWx1ZV8QJEQ2QTQzOUNDLTc5REYtNEYwMy1BMzk4LTQxRDdDQjM5QzY0QdECBV8QJDlFRTlBODVDLTE3QjgtNDE1Ri04NUU3LURFQzY0MTFENDJEQ9ECB18QJDg1MjhCRkE4LTM0REEtNEUzQi04RDI3LUU4RjkxNUI5QUZFMtECCV8QJDc2NkY2M0E0LTMzRkEtNEEwNC1CNUYwLTZFQzlFRDlBNzI3NwgNEBlAQ2ptlJcAAAAAAAABAQAAAAAAAAAKAAAAAAAAAAAAAAAAAAAAvk8RCTFicGxpc3QwMK8QIQEMExogJisxNzxBR0xRVltgZWtwdXp/hImPlJmeo6itstMCAwQFCAtSaWRUc2l6ZVhtb2R1bGVJZNEGB1hyYXdWYWx1ZV8QJDk1QjM5Qzc3LUZDMzgtNERCMC05MzcwLTEzMzM2RUYwOEQ2Q9EJClZtZWRpdW3QWkZvY3VzTW9kZXPTAgMEDQ8S0QYOXxAkNjg4RkU0NTQtMTIzOC00RTVGLTg2RDMtQTM3QzI1OTg0QTIz0RARVWxhcmdl0FdEaXNwbGF50wIDBBQWGdEGFV8QJDhCMjhGMUJCLUQ0OTAtNEI3Ri1BMEE5LTBGRDczNTZGREE5ONEXGFVzbWFsbNBfEA9TY3JlZW5NaXJyb3JpbmfTAgMEGx0f0QYcXxAkOURENzA0RUQtRDNCQi00NDFDLTg0N0ItREI2Q0Y0QTI1NDdG0Qke0FRXaUZp0wIDBCEjJdEGIl8QJDYwNDVFRTlGLTlBMzUtNDA5RS1BQkIzLUIwM0MyMTM4N0ZGNNEQJNBVU291bmTTAgMEJykf0QYoXxAkQUVGOUExRUYtNThGNS00RUFELUE2MTYtMjQzRTI2RDg3RDFF0Qkq0NMCAwQsLjDRBi1fECRBN0VGRDEwQi1FOUI4LTQyNUEtQUM1Qi0zQjM1MkFGNEM3ODbRCS/QWUJsdWV0b290aNMCAwQyNDbRBjNfECQ5RDVDRkY4Qi00MkFELTQ5QTAtQUE0QS02NjAwRDY1NDk2RTfRFzXQXxAQTXVzaWNSZWNvZ25pdGlvbtMCAwQ4OjDRBjlfECRGNTNGRERGNy1ERDlELTRFQkQtOUQxMy04NjcxMzlCMzNGNUbRCTvQ0wIDBD0/GdEGPl8QJEUyQTRCREFGLUI4MzktNDE2Qi05ODRCLURBMzBDMzI5QUQ5RdEXQNDTAgMEQkRG0QZDXxAkNUNCNDA0MDgtMDE2NS00RTY5LUE4OTYtMjY5QzlCRThFQTYy0RBF0FpOb3dQbGF5aW5n0wIDBEhKH9EGSV8QJEU3NzFDRjJGLUI2MzgtNEE4OC1CQUNCLUNERDAwQkJGMTY2N9EJS9DTAgMETU8S0QZOXxAkRUU3ODZCMDEtNDIwMy00NkU5LTkzOUYtNjYzQjQ4MDk2Rjg20RBQ0NMCAwRSVB/RBlNfECRBNTI3NEJDMC02RUZCLTQzQ0MtQTMyNC01RDk3MEI1NUM5RDnRCVXQ0wIDBFdZJdEGWF8QJDI4RjNEQUUwLTc5MEYtNEUxOC1CNkFDLTU3MkIxRTRDQjhBN9EQWtDTAgMEXF4l0QZdXxAkMzc5M0E3NEQtRjVFOS00MDJDLTk0QTktQjc4NUU1MkJFMUIz0RBf0NMCAwRhYxnRBmJfECQ4M0VGMjc5QS1ENjAxLTQyQjAtQTAyRC1DN0M3NjVBQjMyMkHRF2TQ0wIDBGZoatEGZ18QJEVGMDkwMjBBLUQwNjQtNDhEOC04OTQ2LTU4MTJDNjE2OUYzN9EJadBXQWlyRHJvcNMCAwRsbmrRBm1fECQ3OEQwRDlDQi1ERDYwLTRFMkEtOUMyMy0wQTFDNEMxRUQ2MDPRCW/Q0wIDBHFzEtEGcl8QJDcyQTcxMkQ3LUY5M0MtNEQ2RS1BODIzLTFGMTI4QzFBRTRCRNEQdNDTAgMEdngw0QZ3XxAkMkI1MkUyM0UtOUZBRC00QTc4LTlGOTktMjA2RDg5MTAzMUUz0Ql50NMCAwR7fQvRBnxfECRGNDM0Qjc3My1GNDA0LTRCQTctOUMxMC1BNkI2MUM1QTA2MkPRCX7Q0wIDBICCGdEGgV8QJDg3QzdBM0RELUQxNjktNEM1Qi1CQUI5LTU1RTM5NDZCRUY2OdEXg9DTAgMEhYcL0QaGXxAkNTVGNTdDRUYtNTNGMS00QTg5LUI4RTktRUQyQjdENjM5MURF0QmI0NMCAwSKjI7RBotfECQ5N0UzRjc0Ni02NTY4LTREMTktODIzNS02OTc2NEFEMUUzRjTRCY3QXxASS2V5Ym9hcmRCcmlnaHRuZXNz0wIDBJCSEtEGkV8QJDQwNkM3MzIwLTU1ODYtNEZFNS04NjhCLTU3NjkxODVGMEVDN9EQk9DTAgMElZdq0QaWXxAkRDBFRkIzRjgtRUZGQi00OTY0LUJEMDItMjBBRkY5MTY4QTJG0QmY0NMCAwSanGrRBptfECQyNTJBRjUzMC1EOTA1LTQ5RkEtODg1RS1GQ0NCNzUzNzI0MzDRCZ3Q0wIDBJ+hRtEGoF8QJEU4MkY1Rjk0LUJGRjYtNDZFOC1CQ0JCLTQ0NTZFMURDOTQzMtEQotDTAgMEpKYL0QalXxAkQzZFMUFGNUYtN0FFNi00QkM2LUI0ODUtODBGRjBCRUI5RUU50Qmn0NMCAwSpqzDRBqpfECRBNzUyQzVBNi1EQUZELTQ5MDctOEJEQy0yNzVEOEEzRDk2OTLRCazQ0wIDBK6wRtEGr18QJEVFQkQ4RTFFLTk3NDAtNDYzRS05MDg0LUU5OTNDN0RCNDZBNdEQsdDTAgMEs7Ul0Qa0XxAkNjE4RUI4NjYtRUFEQy00OTQzLUIyNTgtRkY0OUNBMERBQjQz0RC20AAIACwAMwA2ADsARABHAFAAdwB6AIEAggCNAJQAlwC+AMEAxwDIANAA1wDaAQEBBAEKAQsBHQEkAScBTgFRAVIBVwFeAWEBiAGLAYwBkgGZAZwBwwHGAccBzgHRAfgB+wH8AgYCDQIQAjcCOgI7Ak4CVQJYAn8CggKDAooCjQK0ArcCuAK/AsIC6QLsAu0C+AL/AwIDKQMsAy0DNAM3A14DYQNiA2kDbAOTA5YDlwOeA6EDyAPLA8wD0wPWA/0EAAQBBAgECwQyBDUENgQ9BEAEZwRqBGsEcwR6BH0EpASnBKgErwSyBNkE3ATdBOQE5wUOBREFEgUZBRwFQwVGBUcFTgVRBXgFewV8BYMFhgWtBbAFsQW4BbsF4gXlBeYF+wYCBgUGLAYvBjAGNwY6BmEGZAZlBmwGbwaWBpkGmgahBqQGywbOBs8G1gbZBwAHAwcEBwsHDgc1BzgHOQdAB0MHagdtB24HdQd4B58HogAAAAAAAAIBAAAAAAAAALcAAAAAAAAAAAAAAAAAAAejAAgADwAbACoAMgBaAF0AZgCNAJAAtwC6AOEA5AELAQ4BNQE4AV8BYgGJAYwBswG2Ad0B4AIHAgoCMQI0AlsCXgKFAogCrwKyAtkC3AMDAwYDLQMwA1cDWgOBA4QDqwOuA9UD2AP/BAIEKQQsBFMEVgR9BIAEpwSqBNEE1AT7BP4FJQUoBU8FUgV5BXwFowWmBc0F0AX3BfoGIQYkBksGTgZ1B2AAAAAAAAACAQAAAAAAAABSAAAAAAAAAAAAAAAAAAAQlQ==",
+    "grid": {
+      "width": 4,
+      "occupiedLocations": [
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 1,
+          "y": 4
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 1
+        },
+        {
+          "x": 1,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "y": 5,
+          "x": 3
+        },
+        {
+          "y": 4,
+          "x": 2
+        },
+        {
+          "y": 0,
+          "x": 3
+        },
+        {
+          "y": 0,
+          "x": 0
+        },
+        {
+          "y": 2,
+          "x": 2
+        },
+        {
+          "y": 2,
+          "x": 3
+        },
+        {
+          "y": 0,
+          "x": 1
+        },
+        {
+          "y": 3,
+          "x": 1
+        },
+        {
+          "y": 1,
+          "x": 3
+        },
+        {
+          "y": 4,
+          "x": 3
+        }
+      ],
+      "id": {
+        "rawValue": 0
+      },
+      "unoccupiedLocations": [
+        {
+          "y": 7,
+          "x": 3
+        },
+        {
+          "y": 5,
+          "x": 2
+        },
+        {
+          "y": 6,
+          "x": 1
+        },
+        {
+          "y": 6,
+          "x": 3
+        },
+        {
+          "y": 7,
+          "x": 1
+        },
+        {
+          "y": 5,
+          "x": 1
+        },
+        {
+          "y": 6,
+          "x": 2
+        },
+        {
+          "y": 6,
+          "x": 0
+        },
+        {
+          "y": 7,
+          "x": 2
+        },
+        {
+          "y": 7,
+          "x": 0
+        },
+        {
+          "y": 5,
+          "x": 0
+        }
+      ],
+      "allLocations": [
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 0,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 1
+        },
+        {
+          "y": 1,
+          "x": 1
+        },
+        {
+          "y": 3,
+          "x": 2
+        },
+        {
+          "x": 3,
+          "y": 6
+        },
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 2,
+          "y": 7
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 7
+        },
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 5
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 3,
+          "y": 4
+        },
+        {
+          "x": 3,
+          "y": 7
+        },
+        {
+          "x": 3,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 5
+        },
+        {
+          "x": 1,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 1,
+          "y": 7
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 5
+        },
+        {
+          "x": 2,
+          "y": 6
+        },
+        {
+          "x": 3,
+          "y": 5
+        },
+        {
+          "x": 1,
+          "y": 4
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        }
+      ],
+      "elements": [
+        {
+          "location": {
+            "x": 0,
+            "y": 4
+          },
+          "id": {
+            "rawValue": "97E3F746-6568-4D19-8235-69764AD1E3F4"
+          },
+          "size": {
+            "rect2x1": {}
+          }
+        },
+        {
+          "location": {
+            "y": 1,
+            "x": 0
+          },
+          "id": {
+            "rawValue": "2B52E23E-9FAD-4A78-9F99-206D891031E3"
+          },
+          "size": {
+            "rect2x1": {}
+          }
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 0
+          },
+          "id": {
+            "rawValue": "E771CF2F-B638-4A88-BACB-CDD00BBF1667"
+          },
+          "size": {
+            "rect2x1": {}
+          }
+        },
+        {
+          "id": {
+            "rawValue": "D0EFB3F8-EFFB-4964-BD02-20AFF9168A2F"
+          },
+          "location": {
+            "y": 0,
+            "x": 2
+          },
+          "size": {
+            "rect2x1": {}
+          }
+        },
+        {
+          "location": {
+            "x": 2,
+            "y": 1
+          },
+          "id": {
+            "rawValue": "C6E1AF5F-7AE6-4BC6-B485-80FF0BEB9EE9"
+          },
+          "size": {
+            "rect2x1": {}
+          }
+        },
+        {
+          "location": {
+            "y": 4,
+            "x": 3
+          },
+          "id": {
+            "rawValue": "87C7A3DD-D169-4C5B-BAB9-55E3946BEF69"
+          },
+          "size": {
+            "square1x1": {}
+          }
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 2
+          },
+          "id": {
+            "rawValue": "6045EE9F-9A35-409E-ABB3-B03C21387FF4"
+          },
+          "size": {
+            "rect4x1": {}
+          }
+        },
+        {
+          "location": {
+            "y": 4,
+            "x": 2
+          },
+          "id": {
+            "rawValue": "8528BFA8-34DA-4E3B-8D27-E8F915B9AFE2"
+          },
+          "size": {
+            "square1x1": {}
+          }
+        },
+        {
+          "location": {
+            "y": 3,
+            "x": 0
+          },
+          "id": {
+            "rawValue": "688FE454-1238-4E5F-86D3-A37C25984A23"
+          },
+          "size": {
+            "rect4x1": {}
+          }
+        },
+        {
+          "location": {
+            "x": 3,
+            "y": 5
+          },
+          "id": {
+            "rawValue": "9EE9A85C-17B8-415F-85E7-DEC6411D42DC"
+          },
+          "size": {
+            "square1x1": {}
+          }
+        }
+      ],
+      "maxHeight": 8
+    },
+    "menuBarIconName": "circle.grid.2x2"
+  }
+]
