@@ -5,8 +5,7 @@
     shortcut = "a";
     keyMode = "vi";
     plugins = with pkgs-unstable.tmuxPlugins; [
-      better-mouse-mode
-      yank
+      vim-tmux-navigator
       {
         plugin = catppuccin;
         extraConfig = "set -g @catppuccin_flavor 'mocha'";
@@ -40,12 +39,8 @@
       bind-key k select-pane -U
       bind-key l select-pane -R
 
-      # smart pane switching with awareness of vim splits
-      bind -n C-h run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim$' && tmux send-keys C-h) || tmux select-pane -L"
-      bind -n C-j run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim$' && tmux send-keys C-j) || tmux select-pane -D"
-      bind -n C-k run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim$' && tmux send-keys C-k) || tmux select-pane -U"
-      bind -n C-l run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim$' && tmux send-keys C-l) || tmux select-pane -R"
-      bind -n 'C-\' run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim$' && tmux send-keys 'C-\\') || tmux select-pane -l"
+      # C-h/j/k/l/C-\ move between tmux panes and nvim splits (vim-tmux-navigator)
+      # prefix C-l clears the screen
       bind C-l send-keys 'C-l'
 
       bind-key C-o rotate-window
@@ -75,6 +70,8 @@
       # Update default binding of `Enter` to also use copy-pipe
       unbind -T copy-mode-vi Enter
       bind-key -T copy-mode-vi Enter send -X copy-pipe-and-cancel "pbcopy"
+      # mouse selection goes to the clipboard too
+      bind-key -T copy-mode-vi MouseDragEnd1Pane send -X copy-pipe-and-cancel "pbcopy"
 
       # Status Bar
       set-option -g status-interval 1

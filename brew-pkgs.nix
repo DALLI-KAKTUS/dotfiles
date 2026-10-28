@@ -76,7 +76,6 @@
       "cowsay"
       "mas"
       "inetutils"
-      "openjdk"
       "qdmr"
       "mole"
       "age"

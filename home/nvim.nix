@@ -1,7 +1,4 @@
-{pkgs, ...}: let
-  nvim_config_files = ../dotfiles/nvim/lua/plugins;
-  toLuaFile = file: "lua << EOF\n${builtins.readFile (nvim_config_files + "/${file}")}\nEOF\n";
-in {
+{pkgs, ...}: {
   programs.neovim = {
     enable = true;
     viAlias = true;
@@ -27,17 +24,19 @@ in {
         '';
       }
       {
-        # ALE
-        plugin = ale;
+        # Snacks: picker (also vim.ui.select), terminal, notifications
+        plugin = snacks-nvim;
         type = "lua";
         config = ''
-          local g = vim.g
-          g.ale_ruby_rubocop_auto_correct_all = 1
-          g.ale_linters = {
-             ruby = {'rubocop', 'ruby'},
-             lua = {'lua_language_server'},
-             python = {'pylint'}
-          }
+          require("snacks").setup({
+            picker = { enabled = true },
+            terminal = { enabled = true },
+            notifier = { enabled = true },
+          })
+          vim.keymap.set("n", "<C-p>", function() Snacks.picker.files() end, { desc = "Find files" })
+          vim.keymap.set("n", "<leader>fg", function() Snacks.picker.grep() end, { desc = "Grep" })
+          vim.keymap.set("n", "<leader><leader>", function() Snacks.picker.pickers() end, { desc = "Pickers" })
+          vim.keymap.set("n", "<leader>t", function() Snacks.terminal.toggle() end, { desc = "Toggle terminal" })
         '';
       }
       {
@@ -78,7 +77,13 @@ in {
           vim.keymap.set("n", "<leader>gt", ":Gitsigns toggle_current_line_blame<CR>", {})
         '';
       }
-      vim-surround
+      {
+        # Surround: same ys/ds/cs and visual S keys as vim-surround
+        # (set up after flash so visual S stays surround, like before)
+        plugin = nvim-surround;
+        type = "lua";
+        config = ''require("nvim-surround").setup()'';
+      }
       {
         # Indent Blankline
         plugin = indent-blankline-nvim;
@@ -111,19 +116,50 @@ in {
         '';
       }
       {
-        # Multiple Cursor
-        plugin = vim-visual-multi;
+        # Multiple Cursor (keys kept close to vim-visual-multi)
+        plugin = multicursor-nvim;
         type = "lua";
-        config = ''vim.g.VM_leader = '<leader>m' '';
+        config = ''
+          local mc = require("multicursor-nvim")
+          mc.setup()
+          local set = vim.keymap.set
+          set({"n", "x"}, "<C-n>", function() mc.matchAddCursor(1) end, { desc = "Add cursor at next match" })
+          set({"n", "x"}, "<C-Down>", function() mc.lineAddCursor(1) end, { desc = "Add cursor below" })
+          set({"n", "x"}, "<C-Up>", function() mc.lineAddCursor(-1) end, { desc = "Add cursor above" })
+          set({"n", "x"}, "<leader>mA", mc.matchAllAddCursors, { desc = "Add cursors at all matches" })
+          set("n", "<c-leftmouse>", mc.handleMouse)
+          set("n", "<c-leftdrag>", mc.handleMouseDrag)
+          set("n", "<c-leftrelease>", mc.handleMouseRelease)
+          -- only while there are multiple cursors
+          mc.addKeymapLayer(function(layerSet)
+            layerSet({"n", "x"}, "q", function() mc.matchSkipCursor(1) end)
+            layerSet({"n", "x"}, "Q", mc.deleteCursor)
+            layerSet("n", "<esc>", function()
+              if not mc.cursorsEnabled() then
+                mc.enableCursors()
+              else
+                mc.clearCursors()
+              end
+            end)
+          end)
+        '';
       }
-      cmp-nvim-lsp
       {
         # LSP config (servers come from home.packages)
         plugin = nvim-lspconfig;
         type = "lua";
         config = ''
           vim.lsp.config('*', {
-              capabilities = require('cmp_nvim_lsp').default_capabilities()
+              capabilities = require('blink.cmp').get_lsp_capabilities()
+          })
+          -- typescript-language-server doesn't bundle typescript
+          vim.lsp.config('ts_ls', {
+              init_options = {
+                  tsserver = { path = "${pkgs.typescript}/lib/node_modules/typescript/lib" }
+              }
+          })
+          vim.lsp.config('lua_ls', {
+              settings = { Lua = { diagnostics = { globals = { 'vim', 'Snacks' } } } }
           })
           vim.lsp.enable({
               'ts_ls',
@@ -142,7 +178,25 @@ in {
           vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
         '';
       }
-      nvim-notify
+      {
+        # Completion
+        plugin = blink-cmp;
+        type = "lua";
+        config = ''
+          require("luasnip.loaders.from_vscode").lazy_load()
+          require("blink.cmp").setup({
+            -- <CR> accepts, <C-Space> opens, <C-e> closes, <C-b>/<C-f> scroll docs
+            keymap = { preset = "enter" },
+            snippets = { preset = "luasnip" },
+            sources = { default = { "lsp", "snippets" } },
+            completion = {
+              menu = { border = "rounded" },
+              documentation = { auto_show = true, window = { border = "rounded" } },
+            },
+          })
+        '';
+      }
+      luasnip
       {
         # Diffview
         plugin = diffview-nvim;
@@ -155,22 +209,9 @@ in {
         type = "lua";
         config = ''
           vim.o.timeout = true
-          vim.o.timeoutlen = 10
+          vim.o.timeoutlen = 300
           require("which-key").setup({})
           vim.keymap.set("n", "<leader>?",function() require("which-key").show({}) end, { desc = "Buffer Local Keymaps (which-key)" })
-        '';
-      }
-      {
-        # ToggleTerm
-        plugin = toggleterm-nvim;
-        type = "lua";
-        config = ''
-          require("toggleterm").setup()
-          vim.keymap.set("n", "<leader>t", '<cmd>ToggleTerm <CR>', { })
-          function _G.set_terminal_keymaps()
-            local opts = {buffer = 0}
-            vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
-          end
         '';
       }
       {
@@ -192,12 +233,6 @@ in {
         '';
       }
       {
-        # Comment
-        plugin = comment-nvim;
-        type = "lua";
-        config = ''require('Comment').setup()'';
-      }
-      {
         # Undotree
         plugin = undotree;
         type = "lua";
@@ -209,22 +244,6 @@ in {
         type = "lua";
         config = ''require('bufferline').setup({})'';
       }
-      # {
-      #   # cmp-cmdline
-      #   plugin = cmp-cmdline;
-      #   type = "lua";
-      #   config = ''
-      #     cmp.setup.cmdline(':', {
-      #       mapping = cmp.mapping.preset.cmdline(),
-      #       sources = cmp.config.sources({
-      #         { name = 'path' }
-      #       }, {
-      #         { name = 'cmdline' }
-      #       }),
-      #       matching = { disallow_symbol_nonprefix_matching = false }
-      #     })
-      #   '';
-      # }
       {
         # Catppuccin
         plugin = catppuccin-nvim;
@@ -251,50 +270,24 @@ in {
         '';
       }
       {
-        # Block
-        plugin = block-nvim;
+        # tmux/nvim pane navigation with C-h/j/k/l
+        plugin = vim-tmux-navigator;
         type = "lua";
-        config = ''require("block").setup({})'';
+        config = "";
       }
       plenary-nvim
-      telescope-ui-select-nvim
       {
-        # Telescope
-        plugin = telescope-nvim;
-        type = "lua";
-        config = ''
-          require("telescope").setup({
-            extensions = {
-              ["ui-select"] = {
-                require("telescope.themes").get_dropdown({}),
-              },
-            },
-          })
-          local builtin = require("telescope.builtin")
-          vim.keymap.set("n", "<C-p>", builtin.find_files, {})
-          vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
-          vim.keymap.set("n", "<leader><leader>", builtin.builtin, {})
-
-          require("telescope").load_extension("ui-select")
-        '';
-      }
-      {
+        # Neo-tree
         plugin = neo-tree-nvim;
-        type = "viml";
-        config = toLuaFile "neo-tree.lua";
-      }
-      luasnip
-      cmp_luasnip
-      {
-        plugin = nvim-cmp;
-        type = "viml";
-        config = toLuaFile "cmp.lua";
+        type = "lua";
+        config = builtins.readFile ../dotfiles/nvim/lua/plugins/neo-tree.lua;
       }
     ];
 
+    # commenting: built-in gc / gcc (nvim >= 0.10)
     extraConfig = ''
+      let mapleader = " "
       nnoremap <SPACE> <Nop>
-      map <Space> <leader>
       set expandtab
       set tabstop=2
       set softtabstop=2

@@ -13,6 +13,7 @@
     duf
     sd
     bat
+    ripgrep
     ripgrep-all
     tldr
     dos2unix
@@ -58,6 +59,10 @@
       ]))
 
     # Language Servers
+    lua-language-server
+    typescript-language-server
+    solargraph
+    vscode-langservers-extracted # html
     nil
     vhdl-ls
     svls

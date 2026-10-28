@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   pkgs,
   ...
 }: {
@@ -32,12 +33,26 @@
         file = "share/fzf-tab/fzf-tab.plugin.zsh";
       }
     ];
-    initContent = ''
-      zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-      zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+    initContent = lib.mkMerge [
+      # zsh-vi-mode resets key bindings when it initializes; doing that while it is
+      # sourced (instead of on the first prompt) keeps fzf's Ctrl-R and the bindings below
+      (lib.mkOrder 550 "ZVM_INIT_MODE=sourcing")
+      ''
+        # up/down arrow: search history for lines starting with what's typed
+        autoload -U up-line-or-beginning-search down-line-or-beginning-search
+        zle -N up-line-or-beginning-search
+        zle -N down-line-or-beginning-search
+        bindkey '^[[A' up-line-or-beginning-search
+        bindkey '^[OA' up-line-or-beginning-search
+        bindkey '^[[B' down-line-or-beginning-search
+        bindkey '^[OB' down-line-or-beginning-search
 
-      krabby random
-    '';
+        zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+        zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+
+        krabby random
+      ''
+    ];
   };
   programs.fzf = {
     enable = true;
