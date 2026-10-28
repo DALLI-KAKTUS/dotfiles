@@ -7,6 +7,9 @@ in {
     viAlias = true;
     vimAlias = true;
     vimdiffAlias = true;
+    # defaults changed to false in home-manager 26.05, keep the providers
+    withPython3 = true;
+    withRuby = true;
 
     plugins = with pkgs.vimPlugins; [
       {
@@ -277,12 +280,14 @@ in {
       }
       {
         plugin = neo-tree-nvim;
+        type = "viml";
         config = toLuaFile "neo-tree.lua";
       }
       luasnip
       cmp_luasnip
       {
         plugin = nvim-cmp;
+        type = "viml";
         config = toLuaFile "cmp.lua";
       }
     ];
