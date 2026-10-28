@@ -1,8 +1,4 @@
-{
-  pkgs,
-  darwin,
-  ...
-}: {
+{...}: {
   homebrew = {
     enable = true;
     onActivation = {
@@ -13,10 +9,10 @@
     taps = [
     ];
     casks = [
-     # "TheBoredTeam/boring-notch/boring-notch"
+      # "TheBoredTeam/boring-notch/boring-notch"
       "loop"
       "Sikarugir-App/sikarugir/sikarugir"
-     # "gerlero/openfoam/openfoam"
+      # "gerlero/openfoam/openfoam"
       "keyboardcleantool"
       "vorssaint"
       "obs"
@@ -34,27 +30,27 @@
       "bambu-studio"
       "pronterface"
       "kicad"
-     # "ra3xdh/qucs-s/qucs-s@nightly"
+      # "ra3xdh/qucs-s/qucs-s@nightly"
       "inkscape"
       "rar"
-     # "ghdl"
-     # "kdenlive"
-     # "orca-slicer"
-     # "ultimaker-cura"
+      # "ghdl"
+      # "kdenlive"
+      # "orca-slicer"
+      # "ultimaker-cura"
       "creality-print"
-     # "waveforms" # digilent
+      # "waveforms" # digilent
       "blender"
       "freecad"
       "openscad"
-     # "klayout"
+      # "klayout"
       "libreoffice"
       "qutebrowser"
       "google-chrome"
       # "chatgpt"
       "claude"
       "claude-code"
-     # "vmware-fusion"
-     # "autodesk-fusion"
+      # "vmware-fusion"
+      # "autodesk-fusion"
       "chirp"
       # system tools
       "maccy"
@@ -95,21 +91,20 @@
       "ninja"
       "dfu-util"
       "pkg-config"
-      "libusb"
       "wireguard-tools"
       "tiger-vnc"
       "furkankly/tap/zoetrope"
     ];
-   # masApps = {
-   #  "whatsapp" = 310633997;
-   #   "plash" = 1494023538;
-   #   "pipifier" = 1160374471;
-   #   "meshtastic" = 1586432531;
-   #   "wireguard" = 1451685025;
-   #   "microsoft-word" = 462054704;
-   #   "keynote" = 409183694;
-   #   "numbers" = 409203825;
-   #   "pages" = 409201541;
-   # };
+    # masApps = {
+    #   "whatsapp" = 310633997;
+    #   "plash" = 1494023538;
+    #   "pipifier" = 1160374471;
+    #   "meshtastic" = 1586432531;
+    #   "wireguard" = 1451685025;
+    #   "microsoft-word" = 462054704;
+    #   "keynote" = 409183694;
+    #   "numbers" = 409203825;
+    #   "pages" = 409201541;
+    # };
   };
 }

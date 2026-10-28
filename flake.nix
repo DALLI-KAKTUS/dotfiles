@@ -11,7 +11,7 @@
     darwin = {
       url = "github:nix-darwin/nix-darwin/nix-darwin-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
-    };    # For spotlight search
+    };
   };
 
   outputs = {
@@ -47,11 +47,7 @@
               inherit pkgs-unstable;
             };
 
-            users.kaktus.imports = [
-              ./home-settings.nix
-              ./home-programs.nix
-              {home.stateVersion = "24.11";}
-            ];
+            users.kaktus.imports = [./home];
           };
         }
       ];

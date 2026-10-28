@@ -12,7 +12,11 @@ in {
   # Haftalık otomatik temizlik: 14 günden eski nesilleri sil, store'u optimize et
   nix.gc = {
     automatic = true;
-    interval = {Weekday = 0; Hour = 3; Minute = 0;};
+    interval = {
+      Weekday = 0;
+      Hour = 3;
+      Minute = 0;
+    };
     options = "--delete-older-than 14d";
   };
   nix.optimise.automatic = true;
