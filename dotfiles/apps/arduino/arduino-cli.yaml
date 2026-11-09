@@ -1,0 +1,10 @@
+board_manager:
+    additional_urls:
+        - https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json
+        - https://raw.githubusercontent.com/deneyapkart/deneyapkart-arduino-core/refs/heads/master/package_deneyapkart_index.json
+directories:
+    builtin:
+        libraries: /Users/kaktus/Library/Arduino15/libraries
+    data: /Users/kaktus/Library/Arduino15
+    user: /Users/kaktus/Documents/Arduino
+locale: en

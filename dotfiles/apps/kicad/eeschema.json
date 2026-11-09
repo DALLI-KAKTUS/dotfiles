@@ -1,0 +1,273 @@
+{
+  "ERC": {
+    "crossprobe": true,
+    "scroll_on_crossprobe": true,
+    "show_all_errors": false
+  },
+  "annotation": {
+    "automatic": true,
+    "messages_filter": 58,
+    "method": 0,
+    "options": 1,
+    "recursive": true,
+    "regroup_units": false,
+    "scope": 0,
+    "sort_order": 0
+  },
+  "appearance": {
+    "color_theme": "catppuccin-mocha",
+    "custom_toolbars": false,
+    "default_font": "KiCad Font",
+    "edit_label_height": 443,
+    "edit_label_visible_columns": "0 1 2 3 4 5 6 7",
+    "edit_label_width": 936,
+    "edit_sheet_height": 447,
+    "edit_sheet_visible_columns": "0 1 2 3 4 5 6 7",
+    "edit_sheet_width": 1040,
+    "edit_symbol_height": 554,
+    "edit_symbol_visible_columns": "0 1 2 3 4 5 6 7",
+    "edit_symbol_width": 1106,
+    "erc_severities": 48,
+    "footprint_preview": true,
+    "mark_sim_exclusions": true,
+    "print_sheet_reference": true,
+    "show_directive_labels": true,
+    "show_erc_errors": true,
+    "show_erc_exclusions": false,
+    "show_erc_warnings": true,
+    "show_hidden_fields": false,
+    "show_hidden_pins": false,
+    "show_illegal_symbol_lib_dialog": true,
+    "show_op_currents": false,
+    "show_op_voltages": true,
+    "show_page_limits": true,
+    "show_pin_alt_icons": false,
+    "show_sexpr_file_convert_warning": true,
+    "show_sheet_filename_case_sensitivity_dialog": true
+  },
+  "autoplace_fields": {
+    "align_to_grid": true,
+    "allow_rejustify": true,
+    "enable": true
+  },
+  "bom": {
+    "plugins": [
+      {
+        "command": "",
+        "name": "bom_csv_grouped_extra",
+        "path": "bom_csv_grouped_extra.py"
+      },
+      {
+        "command": "",
+        "name": "bom_csv_grouped_by_value",
+        "path": "bom_csv_grouped_by_value.py"
+      },
+      {
+        "command": "",
+        "name": "bom_csv_grouped_by_value_with_fp",
+        "path": "bom_csv_grouped_by_value_with_fp.py"
+      }
+    ],
+    "selected_plugin": ""
+  },
+  "change_symbols": {
+    "update_references": false,
+    "update_values": false
+  },
+  "color_picker": {
+    "default_tab": 1
+  },
+  "cross_probing": {
+    "auto_highlight": true,
+    "center_on_items": true,
+    "flash_selection": false,
+    "on_selection": true,
+    "zoom_to_fit": true
+  },
+  "drawing": {
+    "auto_start_wires": true,
+    "default_bus_thickness": 12,
+    "default_junction_size": 36,
+    "default_line_thickness": 6,
+    "default_repeat_offset_x": 0,
+    "default_repeat_offset_y": 100,
+    "default_sheet_background_color": "rgba(0, 0, 0, 0.000)",
+    "default_sheet_border_color": "rgba(0, 0, 0, 0.000)",
+    "default_text_size": 50,
+    "default_wire_thickness": 6,
+    "field_names": "(templatefields)",
+    "hop_over_size_choice": 0,
+    "junction_size_choice": 3,
+    "junction_size_mult_list": [
+      0.0,
+      1.7,
+      4.0,
+      6.0,
+      9.0,
+      12.0
+    ],
+    "line_mode": 1,
+    "new_power_symbols": 0,
+    "pin_symbol_size": 25,
+    "repeat_label_increment": 1,
+    "text_offset_ratio": 0.08
+  },
+  "editing": {
+    "arc_edit_mode": 0
+  },
+  "field_editor": {
+    "export_filename": "",
+    "field_widths": {
+      "${DNP}": 50,
+      "${EXCLUDE_FROM_BOARD}": 50,
+      "${EXCLUDE_FROM_BOM}": 58,
+      "${EXCLUDE_FROM_POS_FILES}": 50,
+      "${EXCLUDE_FROM_SIM}": 50,
+      "${QUANTITY}": 32,
+      "Datasheet": 200,
+      "Footprint": 230,
+      "Reference": 192,
+      "Value": 110
+    },
+    "height": 803,
+    "page": 0,
+    "sash_pos": 200,
+    "scope": 0,
+    "selection_mode": 0,
+    "sidebar_collapsed": false,
+    "variant_sash_pos": 170,
+    "width": 1280
+  },
+  "graphics": {
+    "canvas_type": 1,
+    "highlight_factor": 0.5,
+    "select_factor": 0.75
+  },
+  "import_graphics": {
+    "dxf_units": 0,
+    "interactive_placement": true,
+    "line_width": 0.2,
+    "line_width_units": 0,
+    "origin_units": 0,
+    "origin_x": 0.0,
+    "origin_y": 0.0
+  },
+  "input": {
+    "allow_unconstrained_pin_swaps": false,
+    "drag_is_move": false,
+    "esc_clears_net_highlight": true
+  },
+  "lib_view": {
+    "cmp_list_width": 225,
+    "lib_list_width": 200,
+    "show_pin_electrical_type": true
+  },
+  "meta": {
+    "version": 3
+  },
+  "netlist": {
+    "plugins": []
+  },
+  "page_settings": {
+    "export_comment1": false,
+    "export_comment2": false,
+    "export_comment3": false,
+    "export_comment4": false,
+    "export_comment5": false,
+    "export_comment6": false,
+    "export_comment7": false,
+    "export_comment8": false,
+    "export_comment9": false,
+    "export_company": false,
+    "export_date": false,
+    "export_paper": false,
+    "export_revision": false,
+    "export_title": false
+  },
+  "plot": {
+    "background_color": false,
+    "color": true,
+    "color_theme": "user",
+    "format": 4,
+    "frame_reference": true,
+    "hpgl_origin": 0,
+    "hpgl_paper_size": 0,
+    "hpgl_pen_size": 0.49999899999999997,
+    "other_open_file_after_plot": false,
+    "pdf_hierarchical_links": true,
+    "pdf_metadata": true,
+    "pdf_property_popups": true
+  },
+  "plugins": {
+    "actions": []
+  },
+  "printing": {
+    "as_item_checkboxes": false,
+    "background": false,
+    "color_theme": "_builtin_classic",
+    "drill_marks": 1,
+    "edge_cuts_on_all_pages": true,
+    "layers": [],
+    "mirror": false,
+    "monochrome": false,
+    "pagination": 1,
+    "scale": 1.0,
+    "title_block": true,
+    "use_theme": true
+  },
+  "remote_symbols": {
+    "add_to_global_table": false,
+    "destination_dir": "${KIPRJMOD}/RemoteLibrary",
+    "last_used_provider_id": "",
+    "library_prefix": "remote",
+    "providers": []
+  },
+  "search_pane": {
+    "search_hidden_fields": true,
+    "search_metadata": false,
+    "selection_zoom": 1
+  },
+  "selection": {
+    "drag_net_collision_width": 4,
+    "draw_selected_children": true,
+    "fill_shapes": false,
+    "highlight_netclass_colors": false,
+    "highlight_netclass_colors_alpha": 0.6,
+    "highlight_netclass_colors_thickness": 15,
+    "highlight_thickness": 2,
+    "thickness": 3
+  },
+  "simulator": {
+    "cursors_panel_height": 94,
+    "measurements_panel_height": 20,
+    "mouse_wheel_actions": {
+      "horizontal": 0,
+      "vertical_unmodified": 4,
+      "vertical_with_alt": 0,
+      "vertical_with_ctrl": 1,
+      "vertical_with_shift": 3
+    },
+    "plot_panel_height": 550,
+    "plot_panel_width": 827,
+    "signal_panel_height": 336,
+    "white_background": false
+  },
+  "symbol_chooser": {
+    "height": 803,
+    "keep_symbol": false,
+    "place_all_units": true,
+    "sash_pos_h": 944,
+    "sash_pos_v": 425,
+    "sort_mode": 0,
+    "width": 1280
+  },
+  "system": {
+    "first_run_shown": false,
+    "last_imperial_units": 5,
+    "last_metric_units": 1,
+    "max_undo_items": 0,
+    "never_show_rescue_dialog": false,
+    "show_import_issues": true,
+    "units": 5
+  }
+}

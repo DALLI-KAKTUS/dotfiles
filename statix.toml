@@ -1,0 +1,2 @@
+# home/qutebrowser.nix keeps one dotted line per qutebrowser option, mirroring its docs
+ignore = ["home/qutebrowser.nix", "extraApps"]

@@ -1,0 +1,13 @@
+/extraApps/
+/secrets/
+/.ssh/
+/.vnc/
+**/.env
+**/.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+.DS_Store
+result
+result-*
