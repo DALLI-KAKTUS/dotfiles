@@ -1,4 +1,8 @@
-{pkgs, ...}: let
+{
+  lib,
+  pkgs,
+  ...
+}: let
   py = pkgs.python313Packages;
   # gds3xtrude (GDS layouts to OpenSCAD) and the old solidpython 1.x it needs aren't in
   # nixpkgs; they used to be `pip install --user` packages
@@ -134,4 +138,20 @@ in {
     alejandra
   ];
   programs.java.enable = true;
+
+  # CadQuery and build123d (parametric CAD written in Python) are needed by FreeCAD's CadQuery
+  # workbench, so they have to live in FreeCAD's own Python: the Homebrew FreeCAD bundles
+  # Python 3.11 and can't load packages built for the Nix Python. Neither is in nixpkgs anyway,
+  # so like KiKit above they go from PyPI into that Python's user site (~/.local/lib/python3.11).
+  # The versions are pinned so both use the same OpenCascade bindings (cadquery-ocp 7.8):
+  # build123d 0.11+ moved to OCP 7.9/8.0 and would overwrite cadquery's OCP, and newer
+  # ocp_gordon (a build123d dependency) needs OCP 8 as well. About 1.2 GB with VTK.
+  # Skipped when FreeCAD isn't installed; a failed download doesn't stop the switch.
+  home.activation.freecadCadquery = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    py=/Applications/FreeCAD.app/Contents/Resources/bin/python
+    if [ -x "$py" ] && ! "$py" -c 'from importlib.metadata import version as v; assert v("cadquery") == "2.7.0" and v("build123d") == "0.10.0"' 2>/dev/null; then
+      echo "freecad: installing CadQuery and build123d into FreeCAD's Python" >&2
+      run "$py" -m pip install --user --quiet "cadquery==2.7.0" "build123d==0.10.0" "ocp_gordon<0.2" || true
+    fi
+  '';
 }
